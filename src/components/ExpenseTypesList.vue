@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <div v-for="type in types">
-            {{ type.name }}
+    <div class="row">
+        <div v-for="type in types" class="col-sm-3">
+            <div class="card mt-1">
+                <div class="card-body">
+                    {{ type.name }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
