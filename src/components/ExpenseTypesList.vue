@@ -1,8 +1,8 @@
 <template>
     <div class="row">
-        <div v-for="type in types" class="col-sm-3">
+        <div v-for="type in types" :key="type.name" class="col-sm-3">
             <div class="card mt-1">
-                <div class="card-body">
+                <div class="card-body" v-on:click="click(type.name)">
                     {{ type.name }}
                 </div>
             </div>
@@ -14,6 +14,11 @@
   export default {
     name: 'ExpenseTypesList',
     props: {},
+    methods: {
+        click: (type) => {
+          alert(`Selected  ${type} type!`);
+        }
+    },
     data() {
       return {
         types: [
@@ -34,9 +39,6 @@
           },
           {
             name: 'Unterhaltung'
-          },
-          {
-            name: 'Shopping'
           },
           {
             name: 'Shopping'
