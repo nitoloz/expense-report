@@ -3,7 +3,8 @@
         <div v-for="type in types" :key="type.name" class="col-sm-3">
             <div class="card mt-1">
                 <div class="card-body" v-on:click="click(type.name)">
-                    {{ type.name }}
+                    <h5 class="card-title"> {{ type.name }}</h5>
+                    <i class="fas fa-8x" v-bind:class="type.icon"></i>
                 </div>
             </div>
         </div>
@@ -15,45 +16,56 @@
     name: 'ExpenseTypesList',
     props: {},
     methods: {
-        click: (type) => {
-          alert(`Selected  ${type} type!`);
-        }
+      click: (type) => {
+        alert(`Selected  ${type} type!`);
+      }
     },
     data() {
       return {
         types: [
           {
-            name: 'Lebensmittel'
+            name: 'Lebensmittel',
+            icon: 'fa-apple-alt'
           },
           {
-            name: 'Restaurants'
+            name: 'Restaurants',
+            icon: 'fa-utensils'
           },
           {
-            name: 'Transport'
+            name: 'Transport',
+            icon: 'fa-bus-alt'
           },
           {
-            name: 'Reisen'
+            name: 'Reisen',
+            icon: 'fa-plane'
           },
           {
-            name: 'Haus'
+            name: 'Haus',
+            icon: 'fa-home'
           },
           {
-            name: 'Unterhaltung'
+            name: 'Unterhaltung',
+            icon: 'fa-beer'
           },
           {
-            name: 'Shopping'
+            name: 'Shopping',
+            icon: 'fa-shopping-cart'
           },
           {
-            name: 'Lehre'
+            name: 'Lehre',
+            icon: 'fa-user-graduate'
           },
           {
-            name: 'Medizin'
+            name: 'Medizin',
+            icon: 'fa-briefcase-medical'
           },
           {
-            name: 'Haushaltswaren'
+            name: 'Haushaltswaren',
+            icon: 'fa-hammer'
           },
           {
-            name: 'Sonstig'
+            name: 'Sonstig',
+            icon: 'fa-bullseye'
           }
         ]
       }
