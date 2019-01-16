@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div v-for="type in types" :key="type.name" class="col-sm-3">
-            <div class="card mt-1">
+            <div class="card mt-2">
                 <div class="card-body" v-on:click="click(type.name)">
                     <h5 class="card-title"> {{ type.name }}</h5>
                     <i class="fas fa-8x" v-bind:class="type.icon"></i>
@@ -75,18 +75,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    /*h3 {*/
-    /*margin: 40px 0 0;*/
-    /*}*/
-    /*ul {*/
-    /*list-style-type: none;*/
-    /*padding: 0;*/
-    /*}*/
-    /*li {*/
-    /*display: inline-block;*/
-    /*margin: 0 10px;*/
-    /*}*/
-    /*a {*/
-    /*color: #42b983;*/
-    /*}*/
+    .card {
+        cursor: pointer;
+    }
+
+    .card:hover {
+        background: lightgrey;
+    }
 </style>
