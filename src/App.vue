@@ -1,19 +1,19 @@
 <template>
   <div id="app" class="container">
     <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ExpenseItem item="REWE Frankfurt/Mai / Frankfurt"/>
     <ExpenseTypesList/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ExpenseItem from './components/ExpenseItem.vue'
 import ExpenseTypesList from './components/ExpenseTypesList.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    ExpenseItem,
     ExpenseTypesList
   }
 }
