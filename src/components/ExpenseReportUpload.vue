@@ -20,8 +20,8 @@
                 this.$refs.fileInput.click();
             },
             fileChanged: function () {
-                console.log(this.$refs.fileInput.files);
                 let reader = new FileReader();
+                let fileName = this.$refs.fileInput.files[0].name.substring(23, 33);
                 reader.onload = function () {
                     let allTransactions = [];
                     let spendings = [];
@@ -34,7 +34,9 @@
                         allTransactions.push(expense);
                     }
                     spendings = allTransactions.filter(transaction => transaction[amountColumnLabel] < 0);
-                    console.log(spendings);
+                    let storedSpendings = localStorage.getItem('spendings') ? JSON.parse(localStorage.getItem('spendings')) : {};
+                    storedSpendings[fileName] = spendings;
+                    localStorage.setItem('spendings', JSON.stringify(storedSpendings));
                 };
                 reader.readAsText(this.$refs.fileInput.files[0]);
             }
