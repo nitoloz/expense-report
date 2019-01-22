@@ -1,7 +1,7 @@
 <template>
     <div>
         <ExpenseReportUpload/>
-        <ExpenseItem item="REWE Frankfurt/Mai / Frankfurt"/>
+        <ExpenseItem :item="expenses[currentExpenseIndex]['Umsatz/Ort']"/>
         <ExpenseTypesList v-on:select-type="onSelectType"/>
     </div>
 </template>
@@ -19,9 +19,20 @@
             ExpenseReportUpload
         },
         methods: {
-            onSelectType: (type) => {
-                alert(`Selected  ${type} type!`);
+            onSelectType: function (type) {
+                this.expenses[this.currentExpenseIndex]['ExpenseType'] = type;
+                this.currentExpenseIndex++;
             }
+        },
+        data() {
+            return {
+                currentExpenseIndex: 0,
+                expenses: ['Rewe']
+            }
+        },
+        created: function () {
+            // `this` указывает на экземпляр vm
+            this.expenses = JSON.parse(localStorage.getItem('spendings'))['2019-01-09'];
         }
     }
 </script>
