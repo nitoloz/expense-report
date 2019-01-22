@@ -2,7 +2,7 @@
     <div class="row">
         <div v-for="type in types" :key="type.name" class="col-sm-3">
             <div class="card mt-2">
-                <div class="card-body" v-on:click="click(type.name)">
+                <div class="card-body" v-on:click="$emit('select-type', type.name)">
                     <h5 class="card-title"> {{ type.name }}</h5>
                     <i class="fas fa-8x" v-bind:class="type.icon"></i>
                 </div>
@@ -15,11 +15,6 @@
   export default {
     name: 'ExpenseTypesList',
     props: {},
-    methods: {
-      click: (type) => {
-        alert(`Selected  ${type} type!`);
-      }
-    },
     data() {
       return {
         types: [

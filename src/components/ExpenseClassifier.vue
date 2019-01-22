@@ -2,7 +2,7 @@
     <div>
         <ExpenseReportUpload/>
         <ExpenseItem item="REWE Frankfurt/Mai / Frankfurt"/>
-        <ExpenseTypesList/>
+        <ExpenseTypesList v-on:select-type="onSelectType"/>
     </div>
 </template>
 
@@ -17,6 +17,11 @@
             ExpenseItem,
             ExpenseTypesList,
             ExpenseReportUpload
+        },
+        methods: {
+            onSelectType: (type) => {
+                alert(`Selected  ${type} type!`);
+            }
         }
     }
 </script>
