@@ -1,8 +1,11 @@
 <template>
     <div>
         <ExpenseReportUpload/>
-        <ExpenseItem :item="expenses[currentExpenseIndex]['Umsatz/Ort']"/>
-        <ExpenseTypesList v-on:select-type="onSelectType"/>
+        <ExpenseItem :item="expenses[currentExpenseIndex]['Umsatz/Ort']"
+                     v-on:click-left="viewPrevious"
+                     v-on:click-right="viewNext"/>
+        <ExpenseTypesList :selectedType="expenses[currentExpenseIndex].ExpenseType"
+                          v-on:select-type="onSelectType"/>
     </div>
 </template>
 
@@ -22,6 +25,12 @@
             onSelectType: function (type) {
                 this.expenses[this.currentExpenseIndex]['ExpenseType'] = type;
                 this.currentExpenseIndex++;
+            },
+            viewPrevious: function () {
+                this.currentExpenseIndex = this.currentExpenseIndex > 0 ? this.currentExpenseIndex - 1 : this.expenses.length - 1;
+            },
+            viewNext: function () {
+                this.currentExpenseIndex = this.currentExpenseIndex < this.expenses.length - 1 ? this.currentExpenseIndex + 1 : 0;
             }
         },
         data() {
