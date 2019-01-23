@@ -1,7 +1,14 @@
 <template>
-    <div class="hello">
-        <h1><i class="fas fa-chevron-left mr-5" v-on:click="$emit('click-left')"></i>{{ item }} <i
-                class="fas fa-chevron-right ml-5" v-on:click="$emit('click-right')"></i></h1>
+    <div>
+        <h2 class="row">
+            <div class="col-sm-1"><i class="fas fa-chevron-left mr-5" v-on:click="$emit('click-left')"></i></div>
+            <div class="col-sm-10">
+                {{ item['Umsatz/Ort'] }},
+                {{ item['Kaufdatum'] }},
+                {{ item['Betrag in EUR']}} EUR
+            </div>
+            <div class="col-sm-1"><i class="fas fa-chevron-right ml-5" v-on:click="$emit('click-right')"></i></div>
+        </h2>
     </div>
 </template>
 
@@ -9,7 +16,7 @@
     export default {
         name: 'ExpenseItem',
         props: {
-            item: String
+            item: Object
         }
     }
 </script>

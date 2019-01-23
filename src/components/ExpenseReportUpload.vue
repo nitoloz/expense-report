@@ -12,9 +12,6 @@
 
     export default {
         name: 'ExpenseReportUpload',
-        props: {
-            item: String
-        },
         methods: {
             selectFileClick: function () {
                 this.$refs.fileInput.click();

@@ -1,7 +1,7 @@
 <template>
     <div>
         <ExpenseReportUpload/>
-        <ExpenseItem :item="expenses[currentExpenseIndex]['Umsatz/Ort']"
+        <ExpenseItem :item="expenses[currentExpenseIndex]"
                      v-on:click-left="viewPrevious"
                      v-on:click-right="viewNext"/>
         <ExpenseTypesList :selectedType="expenses[currentExpenseIndex].ExpenseType"
