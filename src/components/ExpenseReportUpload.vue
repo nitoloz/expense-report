@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" v-on:click="selectFileClick()">Select file</button>
+        <button type="button" class="btn btn-primary float-right" v-on:click="selectFileClick()">Upload file</button>
         <input type="file"
                ref="fileInput"
                v-on:change="fileChanged"
