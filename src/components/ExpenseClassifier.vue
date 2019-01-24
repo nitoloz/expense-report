@@ -9,11 +9,13 @@
             </div>
 
         </div>
-        <ExpenseItem :item="expenses[currentExpenseIndex]"
+        <ExpenseItem v-if="expenses.length > 0"
+                     :item="expenses[currentExpenseIndex]"
                      v-on:click-left="viewPrevious"
                      v-on:click-right="viewNext"/>
-        <ExpenseTypesList :selectedType="expenses[currentExpenseIndex].ExpenseType"
+        <ExpenseTypesList v-if="expenses.length > 0" :selectedType="expenses[currentExpenseIndex].ExpenseType"
                           v-on:select-type="onSelectType"/>
+        <h3 v-else> Please select expenses month to start classification!</h3>
     </div>
 </template>
 
@@ -55,7 +57,6 @@
             }
         },
         created: function () {
-            this.expenses = JSON.parse(localStorage.getItem('spendings'))['2019-01-09'];
             this.months = Object.keys(JSON.parse(localStorage.getItem('spendings')))
         }
     }
