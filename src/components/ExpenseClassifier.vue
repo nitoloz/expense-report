@@ -1,10 +1,17 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-sm-6">
-                <ExpenseReportSelector  v-on:select-month="selectMonth" :months="months"/>
+            <div class="col-sm-4">
+                <ExpenseReportSelector v-on:select-month="selectMonth" :months="months"/>
             </div>
-            <div class="col-sm-6">
+            <h4 class="col-sm-4">
+                <div v-if="expenses.length > 0">
+                    ({{currentExpenseIndex+1}}/{{expenses.length}})
+                    <button type="button" class="btn btn-primary float-right" v-on:click="saveExpenses()">Save expenses
+                    </button>
+                </div>
+            </h4>
+            <div class="col-sm-4">
                 <ExpenseReportUpload/>
             </div>
 
@@ -45,13 +52,24 @@
                 this.currentExpenseIndex = this.currentExpenseIndex < this.expenses.length - 1 ? this.currentExpenseIndex + 1 : 0;
             },
             selectMonth: function (event) {
+                this.selectedMonth = event.target.value;
                 this.expenses = JSON.parse(localStorage.getItem('spendings'))[event.target.value];
                 this.currentExpenseIndex = 0;
+            },
+            saveExpenses: function () {
+                let storedSpendings = localStorage.getItem('spendings') ? JSON.parse(localStorage.getItem('spendings')) : {};
+                storedSpendings[this.selectedMonth] = this.expenses;
+                localStorage.setItem('spendings', JSON.stringify(storedSpendings));
+                // console.log(d3.nest()
+                //     .key(function(d) { return d.ExpenseType; })
+                //     .rollup(function(expenses) { return d3.sum(expenses.map(d=>d['Betrag in EUR'])); })
+                //         .entries(this.expenses));
             }
         },
         data() {
             return {
                 currentExpenseIndex: 0,
+                selectedMonth: '',
                 expenses: [],
                 months: []
             }
