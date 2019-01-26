@@ -31,6 +31,7 @@
     import ExpenseTypesList from './ExpenseTypesList.vue'
     import ExpenseReportUpload from './ExpenseReportUpload.vue'
     import ExpenseReportSelector from './ExpenseReportSelector.vue'
+    import * as d3 from 'd3';
 
     export default {
         name: 'ExpenseClassifier',
