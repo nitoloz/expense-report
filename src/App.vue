@@ -1,18 +1,16 @@
 <template>
   <div id="app" class="container">
     <Navbar/>
-    <ExpenseClassifier/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ExpenseClassifier from './components/ExpenseClassifier.vue'
 import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'app',
   components: {
-      ExpenseClassifier,
       Navbar
   }
 }
