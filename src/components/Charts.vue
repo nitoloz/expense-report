@@ -1,8 +1,8 @@
 <template>
     <div>
         <h3> Charts</h3>
-        <article v-for="expense in JSON.parse(expenses.data)">
-            <h1> {{ expense }}</h1>
+        <article v-for="expense in expenses">
+            <h1> {{expense.id}}:{{ expense }}</h1>
         </article>
     </div>
 </template>
@@ -24,7 +24,8 @@
     },
     firestore() {
       return {
-        expenses: db.collection('expenses').doc('2018-12-10')
+        // expenses: db.collection('expenses').doc('2018-12-10').collection('data')
+        expenses: db.collection('expenses').doc('2018-08-08').collection('data')
       }
     }
   }

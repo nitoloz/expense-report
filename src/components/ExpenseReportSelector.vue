@@ -2,7 +2,7 @@
     <div>
         <select class="form-control"  v-on:change="$emit('select-month', $event)">
             <option selected disabled>Select month</option>
-            <option v-for="month in months" :key="month"  v-bind:value="month">{{month}}</option>
+            <option v-for="month in months" :key="month.id"  v-bind:value="month.id">{{month.id}}</option>
         </select>
     </div>
 </template>
