@@ -12,7 +12,9 @@
   import {db} from '../main'
 
   import * as d3 from 'd3';
+  import pieChart from '../charts/PieChart';
 
+  let dynamicPieChart;
   export default {
     name: 'PieChart',
     props: {data: Array},
@@ -27,6 +29,13 @@
             })
             .entries(newVal)
             .sort((a, b) => a.value - b.value);
+
+        dynamicPieChart
+            .groupByOptionLabel('City')
+            .data(this.expensesGroups);
+
+        d3.select(this.$el).call(dynamicPieChart);
+
       }
     },
     methods: {},
@@ -34,6 +43,12 @@
       return {
         expensesGroups: []
       }
+    },
+    created() {
+      dynamicPieChart = pieChart.pieChart()
+          .width(900)
+          .height(900)
+          .placeHolderTooltip('');
     }
   }
 </script>
