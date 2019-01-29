@@ -4,7 +4,7 @@
             <div class="card mt-2" v-bind:class="{ selected: type.name===selectedType }">
                 <div class="card-body" v-on:click="$emit('select-type', type.name)">
                     <h5 class="card-title"> {{ type.name }}</h5>
-                    <i class="fas fa-8x" v-bind:class="type.icon"></i>
+                    <i class="fas fa-6x" v-bind:class="type.icon"></i>
                 </div>
             </div>
         </div>
