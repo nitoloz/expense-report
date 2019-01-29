@@ -5,22 +5,18 @@
                 <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
             </div>
             <h4 class="col-sm-4">
-                <div v-if="expenses.length > 0">
-                    ({{currentExpenseIndex+1}}/{{expenses.length}})
-                    <button type="button" class="btn btn-primary float-right" v-on:click="saveExpenses()">Save expenses
-                    </button>
-                </div>
+                <span v-if="selectedMonth">({{currentExpenseIndex+1}}/{{selectedMonthSize}})</span>
             </h4>
             <div class="col-sm-4">
                 <ExpenseReportUpload/>
             </div>
 
         </div>
-        <ExpenseItem v-if="expenses.length > 0"
-                     :item="expenses[currentExpenseIndex]"
+        <ExpenseItem v-if="selectedMonth"
+                     :item="selectedExpense"
                      v-on:click-left="viewPrevious"
                      v-on:click-right="viewNext"/>
-        <ExpenseTypesList v-if="expenses.length > 0" :selectedType="expenses[currentExpenseIndex].ExpenseType"
+        <ExpenseTypesList v-if="selectedMonth" :selectedType="selectedExpense.ExpenseType"
                           v-on:select-type="onSelectType"/>
         <h3 v-else> Please select expenses month to start classification!</h3>
     </div>
@@ -44,29 +40,26 @@
     },
     methods: {
       onSelectType: function (type) {
-        this.expenses[this.currentExpenseIndex]['ExpenseType'] = type;
+        db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()).update({ExpenseType: type})
         this.currentExpenseIndex++;
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       },
       viewPrevious: function () {
-        this.currentExpenseIndex = this.currentExpenseIndex > 0 ? this.currentExpenseIndex - 1 : this.expenses.length - 1;
+        this.currentExpenseIndex = this.currentExpenseIndex > 0 ? this.currentExpenseIndex - 1 : this.selectedMonthSize - 1;
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       },
       viewNext: function () {
-        this.currentExpenseIndex = this.currentExpenseIndex < this.expenses.length - 1 ? this.currentExpenseIndex + 1 : 0;
+        this.currentExpenseIndex = this.currentExpenseIndex < this.selectedMonthSize - 1 ? this.currentExpenseIndex + 1 : 0;
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       },
       selectMonth: function (event) {
         this.selectedMonth = event.target.value;
-        this.expenses = JSON.parse(localStorage.getItem('spendings'))[event.target.value];
         this.currentExpenseIndex = 0;
-      },
-      saveExpenses: function () {
-        let storedSpendings = localStorage.getItem('spendings') ? JSON.parse(localStorage.getItem('spendings')) : {};
-        storedSpendings[this.selectedMonth] = this.expenses;
-        localStorage.setItem('spendings', JSON.stringify(storedSpendings));
-        // db.collection('expenses').doc(this.selectedMonth).collection('data').doc() add(this.expenses[0])
-        // console.log(d3.nest()
-        //     .key(function(d) { return d.ExpenseType; })
-        //     .rollup(function(expenses) { return d3.sum(expenses.map(d=>d['Betrag in EUR'])); })
-        //         .entries(this.expenses));
+        let that = this;
+        db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
+          that.selectedMonthSize = querySnapshot.size;
+        });
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       }
     },
     data() {
@@ -75,7 +68,9 @@
         selectedMonth: '',
         expenses: [],
         months: [],
-        firebaseExpenses:[]
+        firebaseExpenses: [],
+        selectedExpense: {},
+        selectedMonthSize: 0
       }
     },
     created: function () {
