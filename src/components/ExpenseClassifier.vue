@@ -66,15 +66,10 @@
       return {
         currentExpenseIndex: 0,
         selectedMonth: '',
-        expenses: [],
-        months: [],
         firebaseExpenses: [],
         selectedExpense: {},
         selectedMonthSize: 0
       }
-    },
-    created: function () {
-      this.months = Object.keys(JSON.parse(localStorage.getItem('spendings')))
     },
     firestore() {
       return {
