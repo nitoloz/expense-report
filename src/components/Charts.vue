@@ -1,5 +1,6 @@
 <template>
     <div>
+        <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
         <PieChart :data="expenses"/>
     </div>
 </template>
@@ -8,20 +9,30 @@
 
   import {db} from '../main'
   import PieChart from './PieChart';
+  import ExpenseReportSelector from './ExpenseReportSelector';
 
   export default {
     name: 'Charts',
-    components: {PieChart},
-    methods: {},
+    components: {
+      PieChart,
+      ExpenseReportSelector
+    },
+    methods: {
+      selectMonth: function (event) {
+        this.selectedMonth = event.target.value;
+        this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
+      }
+    },
     data() {
       return {
-        expenses: []
+        selectedMonth: '',
+        expenses: [],
+        firebaseExpenses: []
       }
     },
     firestore() {
       return {
-        // expenses: db.collection('expenses').doc('2018-12-10').collection('data')
-        expenses: db.collection('expenses').doc('2018-08-08').collection('data')
+        firebaseExpenses: db.collection('expenses')
       }
     }
   }
