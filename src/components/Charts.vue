@@ -1,21 +1,17 @@
 <template>
     <div>
-        <h3> Charts</h3>
-        <article v-for="expense in expenses">
-            <h1> {{expense.id}}:{{ expense }}</h1>
-        </article>
+        <PieChart :data="expenses"/>
     </div>
 </template>
 
 <script>
 
   import {db} from '../main'
-
-  // import * as d3 from 'd3';
+  import PieChart from './PieChart';
 
   export default {
     name: 'Charts',
-    components: {},
+    components: {PieChart},
     methods: {},
     data() {
       return {
