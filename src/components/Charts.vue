@@ -1,7 +1,7 @@
 <template>
     <div>
         <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
-        <PieChart :data="expenses"/>
+        <PieChart :data="expenses" :month="selectedMonth"/>
     </div>
 </template>
 

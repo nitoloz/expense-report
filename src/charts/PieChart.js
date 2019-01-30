@@ -11,12 +11,7 @@ function pieChart() {
         colorScale: d3.scaleOrdinal(d3.schemeSet3),
         tooltipFormatter: (data) => {
             return `<tspan x="0">${groupByOptionLabel}: ${data.data.key}</tspan>
-                    <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} (${data.data.value.extra.percentageValue}%)</tspan>
-                    <tspan x="0" dy="1.2em">Mean salary: ${data.data.value.extra.meanSalary}</tspan>
-                    <tspan x="0" dy="2em">1st quartile: ${data.data.value.extra.quartiles[0]}</tspan>
-                    <tspan x="0" dy="1.2em">Median salary: ${data.data.value.extra.quartiles[1]}</tspan>
-                    <tspan x="0" dy="1.2em">3rd quartile: ${data.data.value.extra.quartiles[2]}</tspan>
-                    <tspan x="0" dy="1.2em">Median raise: ${data.data.value.extra.medianRaise}</tspan>`;
+                    <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} (${data.data.value.percentageValue}%)</tspan>`;
         },
         placeHolderTooltip: null
     };
