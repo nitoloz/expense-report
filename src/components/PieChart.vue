@@ -37,7 +37,7 @@
     },
     created() {
       dynamicPieChart = pieChart.pieChart()
-          .width(1200)
+          .width(900)
           .height(600)
           .valueLabel('Betrag in EUR');
 

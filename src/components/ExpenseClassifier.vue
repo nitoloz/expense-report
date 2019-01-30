@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="container">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
             </div>
-            <h4 class="col-sm-4">
+            <h4 class="col-sm-2">
                 <span v-if="selectedMonth">({{currentExpenseIndex+1}}/{{selectedMonthSize}})</span>
             </h4>
             <div class="col-sm-4">

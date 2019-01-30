@@ -1,9 +1,16 @@
 <template>
     <div>
-        <select class="form-control"  v-on:change="$emit('select-month', $event)">
-            <option selected disabled>Select month</option>
-            <option v-for="month in months" :key="month.id"  v-bind:value="month.id">{{month.id}}</option>
-        </select>
+
+        <form class="form-group float-center">
+            <div class="form-group row">
+                <label class="col-sm-8 col-lg-4 col-form-label text-right">Select month: </label>
+                <select class="col-sm-4 form-control"  v-on:change="$emit('select-month', $event)">
+                    <option selected disabled>Select month</option>
+                    <option v-for="month in months" :key="month.id"  v-bind:value="month.id">{{month.id}}</option>
+                </select>
+            </div>
+        </form>
+
     </div>
 </template>
 

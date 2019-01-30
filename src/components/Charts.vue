@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
-        <PieChart :data="expenses" :month="selectedMonth"/>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-8">
+            <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
+            <PieChart :data="expenses" :month="selectedMonth"/>
+        </div>
+        </div>
     </div>
 </template>
 
