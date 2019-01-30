@@ -22,7 +22,7 @@ export default class ChartDataProcessor {
     };
 
     return d3.nest()
-        .key(d => internalMap[d[groupByOption]] / totalSum > minimalLevel ? d[groupByOption] : OTHERS_GROUP)
+        .key(d => internalMap[d[groupByOption]] / totalSum > minimalLevel ? d[groupByOption] || OTHERS_GROUP : OTHERS_GROUP)
         .rollup(d => {
           const values = d.map(response => response[AMOUNT]);
           return {

@@ -8,7 +8,9 @@ function pieChart() {
     data: [],
     groupByOptionLabel: 'City',
     valueLabel: 'Respondents',
-    colorScale: d3.scaleOrdinal(d3.schemeSet3),
+    colorScale: d3.scaleOrdinal()
+        .domain(['Lebensmittel', 'Restaurants', 'Transport', 'Reisen', 'Haus', 'Unterhaltung', 'Shopping', 'Lehre', 'Medizin', 'Haushaltswaren', 'Sonstig', 'Other'])
+        .range(["#8dd3c7", "#ffffb3", "#bebada", "#d9d9d9", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#fb8072", "#bc80bd", "#ccebc5", "#ffed6f"]),
     tooltipFormatter: (data) => {
       return `<tspan x="0">${groupByOptionLabel}: ${data.data.key}</tspan>
                     <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} EUR (${data.data.value.percentageValue}%)</tspan>`;
