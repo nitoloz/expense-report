@@ -11,7 +11,7 @@ function pieChart() {
         colorScale: d3.scaleOrdinal(d3.schemeSet3),
         tooltipFormatter: (data) => {
             return `<tspan x="0">${groupByOptionLabel}: ${data.data.key}</tspan>
-                    <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} (${data.data.value.percentageValue}%)</tspan>`;
+                    <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} EUR (${data.data.value.percentageValue}%)</tspan>`;
         },
         placeHolderTooltip: null
     };
@@ -76,7 +76,7 @@ function pieChart() {
                 .attr('class', 'label')
                 .attr('dy', '.35em')
                 .html(function (d) {
-                    return `${d.data.key}: <tspan>${d.data.value.value}</tspan>`;
+                    return `<tspan text-decoration="underline">${d.data.key}</tspan>: <tspan>${d.data.value.value} EUR</tspan>`;
                 })
                 .attr('transform', function (d) {
                     let pos = outerArc.centroid(d);
@@ -229,9 +229,9 @@ function pieChart() {
             function showTooltip(tooltipContent, color) {
                 pieChartSvg.append('text')
                     .attr('class', 'tooltipCircle')
-                    .attr('dy', -55)
+                    .attr('dy', -15)
                     .html(() => tooltipContent)
-                    .style('font-size', '.9em')
+                    .style('font-size', '1.1em')
                     .style('text-anchor', 'middle');
 
                 pieChartSvg.append('circle')

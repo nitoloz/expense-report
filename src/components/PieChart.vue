@@ -21,7 +21,7 @@
         if (newVal.length > 0) {
           this.expensesGroups = restResourceService.processPieChartData(newVal, 'ExpenseType');
           const placeHolderTooltip = `<tspan x="0">Month ${this.month}</tspan>
-                                <tspan x="0" dy="1.2em">Total spendings: ${d3.sum(newVal.map(d => d['Betrag in EUR']))}</tspan>`;
+                                <tspan x="0" dy="1.2em">Total spendings: <tspan font-weight="bold">${-1*d3.sum(newVal.map(d => d['Betrag in EUR']))} EUR</tspan></tspan>`;
           dynamicPieChart
               .groupByOptionLabel('Expense Type')
               .placeHolderTooltip(placeHolderTooltip)
