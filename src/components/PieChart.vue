@@ -1,10 +1,5 @@
 <template>
-    <div>
-        <h3> Charts</h3>
-        <article v-for="expense in expensesGroups">
-            <h1> {{expense.key}}:{{ expense.value }}</h1>
-        </article>
-    </div>
+    <div></div>
 </template>
 
 <script>
@@ -13,29 +8,25 @@
 
   import * as d3 from 'd3';
   import pieChart from '../charts/PieChart';
+  import RestResource from '../services/DataProcessor';
 
+  const restResourceService = new RestResource();
+  ;
   let dynamicPieChart;
   export default {
     name: 'PieChart',
     props: {data: Array},
     watch: {
-      data: function (newVal, oldVal) { // watch it
-        this.expensesGroups = d3.nest()
-            .key(function (d) {
-              return d.ExpenseType;
-            })
-            .rollup(function (expenses) {
-              return d3.sum(expenses.map(d => d['Betrag in EUR']));
-            })
-            .entries(newVal)
-            .sort((a, b) => a.value - b.value);
-
-        dynamicPieChart
-            .groupByOptionLabel('City')
-            .data(this.expensesGroups);
-
-        d3.select(this.$el).call(dynamicPieChart);
-
+      data: function (newVal, oldVal) {
+        if (newVal.length > 0) {
+          this.expensesGroups = restResourceService.processPieChartData(newVal, 'ExpenseType');
+          dynamicPieChart
+              .groupByOptionLabel('Expense Type')
+              .data(this.expensesGroups);
+          if (d3.select(this.$el).selectAll('svg').size() === 0) {
+            d3.select(this.$el).call(dynamicPieChart);
+          }
+        }
       }
     },
     methods: {},
@@ -46,8 +37,8 @@
     },
     created() {
       dynamicPieChart = pieChart.pieChart()
-          .width(900)
-          .height(900)
+          .width(1200)
+          .height(600)
           .placeHolderTooltip('');
     }
   }

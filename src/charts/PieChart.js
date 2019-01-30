@@ -81,7 +81,7 @@ function pieChart() {
                 .attr('class', 'label')
                 .attr('dy', '.35em')
                 .html(function (d) {
-                    return `${d.data.key}: <tspan>${d.data.value.extra.percentageValue}%</tspan>`;
+                    return `${d.data.key}: <tspan>${d.data.value.value}</tspan>`;
                 })
                 .attr('transform', function (d) {
                     let pos = outerArc.centroid(d);
@@ -142,7 +142,7 @@ function pieChart() {
                     .attr('class', 'label')
                     .attr('dy', '.35em')
                     .html(function (d) {
-                        return `${d.data.key}: <tspan>${d.data.value.extra.percentageValue}%</tspan>`;
+                        return `${d.data.key}: <tspan>${d.data.value.value}</tspan>`;
                     })
                     .style('text-anchor', function (d) {
                         return (midAngle(d)) < Math.PI ? 'start' : 'end';
@@ -159,7 +159,7 @@ function pieChart() {
                     .on("end", function () {
                         d3.select(this)
                             .html(function (d) {
-                                return `${d.data.key}: <tspan>${d.data.value.extra.percentageValue}%</tspan>`;
+                                return `${d.data.key}: <tspan>${d.data.value.value}</tspan>`;
                             })
                             .style('opacity', 1);
                     });
