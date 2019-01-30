@@ -8,7 +8,7 @@
 
   import * as d3 from 'd3';
   import pieChart from '../charts/PieChart';
-  import RestResource from '../services/DataProcessor';
+  import RestResource from '../services/ChartDataProcessor';
 
   const restResourceService = new RestResource();
   ;
