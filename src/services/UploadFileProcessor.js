@@ -1,3 +1,5 @@
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 export default class UploadFileProcessor {
 
   processUploadedFile(result) {
@@ -11,5 +13,10 @@ export default class UploadFileProcessor {
       allTransactions.push(expense);
     }
     return allTransactions.filter(transaction => transaction[amountColumnLabel] < 0);
+  }
+
+  processFileName(fileName) {
+    const splitFileName = fileName.substring(23, 33).split('-');
+    return `${months[parseInt(splitFileName[1]) - 1]} ${splitFileName[0]}`;
   }
 }

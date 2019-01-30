@@ -22,7 +22,7 @@
       },
       fileChanged: function () {
         let reader = new FileReader();
-        let fileName = this.$refs.fileInput.files[0].name.substring(23, 33);
+        let fileName = uploadFileProcessor.processFileName(this.$refs.fileInput.files[0].name);
         reader.onload = function () {
           db.collection('expenses').doc(fileName).delete();
           db.collection('expenses').doc(fileName).set({uploaded: new Date()});
