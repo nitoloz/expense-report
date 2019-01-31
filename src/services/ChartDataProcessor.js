@@ -5,7 +5,7 @@ const AMOUNT = 'Betrag in EUR';
 
 export default class ChartDataProcessor {
 
-  processPieChartData(data, groupByOption, minimalLevel = 0.01) {
+  processPieChartData(data, groupByOption, minimalLevel = 0.02) {
     const internalMap = new Map();
     data.forEach(d => internalMap[d[groupByOption]]
         ? internalMap[d[groupByOption]] += d[AMOUNT]
