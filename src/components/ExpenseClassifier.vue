@@ -40,9 +40,8 @@
     },
     methods: {
       onSelectType: function (type) {
-        db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()).update({ExpenseType: type})
-        this.currentExpenseIndex++;
-        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
+        db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()).update({ExpenseType: type});
+        this.viewNext();
       },
       viewPrevious: function () {
         this.currentExpenseIndex = this.currentExpenseIndex > 0 ? this.currentExpenseIndex - 1 : this.selectedMonthSize - 1;

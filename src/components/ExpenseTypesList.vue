@@ -12,62 +12,64 @@
 </template>
 
 <script>
-    export default {
-        name: 'ExpenseTypesList',
-        props: {
-            selectedType: String
-        },
-        data() {
-            return {
-                types: [
-                    {
-                        name: 'Lebensmittel',
-                        icon: 'fa-apple-alt'
-                    },
-                    {
-                        name: 'Restaurants',
-                        icon: 'fa-utensils'
-                    },
-                    {
-                        name: 'Transport',
-                        icon: 'fa-bus-alt'
-                    },
-                    {
-                        name: 'Reisen',
-                        icon: 'fa-plane'
-                    },
-                    {
-                        name: 'Haus',
-                        icon: 'fa-home'
-                    },
-                    {
-                        name: 'Unterhaltung',
-                        icon: 'fa-beer'
-                    },
-                    {
-                        name: 'Shopping',
-                        icon: 'fa-shopping-cart'
-                    },
-                    {
-                        name: 'Lehre',
-                        icon: 'fa-user-graduate'
-                    },
-                    {
-                        name: 'Medizin',
-                        icon: 'fa-briefcase-medical'
-                    },
-                    {
-                        name: 'Haushaltswaren',
-                        icon: 'fa-hammer'
-                    },
-                    {
-                        name: 'Sonstig',
-                        icon: 'fa-bullseye'
-                    }
-                ]
-            }
-        }
+  import ExpenseTypes from '../enums/ExpenseTypes';
+
+  export default {
+    name: 'ExpenseTypesList',
+    props: {
+      selectedType: String
+    },
+    data() {
+      return {
+        types: [
+          {
+            name: ExpenseTypes.LEBENSMITTEL,
+            icon: 'fa-apple-alt'
+          },
+          {
+            name: ExpenseTypes.RESTAURANTS,
+            icon: 'fa-utensils'
+          },
+          {
+            name: ExpenseTypes.TRANSPORT,
+            icon: 'fa-bus-alt'
+          },
+          {
+            name: ExpenseTypes.REISEN,
+            icon: 'fa-plane'
+          },
+          {
+            name: ExpenseTypes.HAUS,
+            icon: 'fa-home'
+          },
+          {
+            name: ExpenseTypes.UNTERHALTUNG,
+            icon: 'fa-beer'
+          },
+          {
+            name: ExpenseTypes.SHOPPING,
+            icon: 'fa-shopping-cart'
+          },
+          {
+            name: ExpenseTypes.LEHRE,
+            icon: 'fa-user-graduate'
+          },
+          {
+            name: ExpenseTypes.MEDIZIN,
+            icon: 'fa-briefcase-medical'
+          },
+          {
+            name: ExpenseTypes.HAUSHALTSWAREN,
+            icon: 'fa-hammer'
+          },
+          {
+            name: ExpenseTypes.SONSTIG,
+            icon: 'fa-bullseye'
+          }
+        ]
+      }
     }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
