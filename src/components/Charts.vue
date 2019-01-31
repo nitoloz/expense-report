@@ -1,10 +1,28 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-        <div class="col-md-8">
-            <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
-            <PieChart :data="expenses" :month="selectedMonth"/>
-        </div>
+            <div class="col-md-8">
+                <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
+                <PieChart :data="expenses" :month="selectedMonth" v-on:select-pie-section="selectPieChartSection"/>
+            </div>
+            <div class="col-md-4">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ExpenseItem.EXPENSE_NAME}}</th>
+                        <th scope="col">{{ExpenseItem.PURCHASE_AMOUNT}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(expense,index) in expensesSection" class="text-left">
+                        <th scope="row">{{index+1}}</th>
+                        <td>{{expense[ExpenseItem.EXPENSE_NAME]}}</td>
+                        <td>{{expense[ExpenseItem.PURCHASE_AMOUNT]}} EUR</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -14,6 +32,7 @@
   import {db} from '../main'
   import PieChart from './PieChart';
   import ExpenseReportSelector from './ExpenseReportSelector';
+  import ExpenseItem from '../enums/ExpenseItem';
 
   export default {
     name: 'Charts',
@@ -25,13 +44,20 @@
       selectMonth: function (event) {
         this.selectedMonth = event.target.value;
         this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
+      },
+      selectPieChartSection: function (data) {
+        this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
+            .where(ExpenseItem.EXPENSE_TYPE, "==", data.key).orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
+
       }
     },
     data() {
       return {
         selectedMonth: '',
         expenses: [],
-        firebaseExpenses: []
+        expensesSection: [],
+        firebaseExpenses: [],
+        ExpenseItem: ExpenseItem
       }
     },
     firestore() {

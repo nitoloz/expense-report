@@ -15,7 +15,8 @@ function pieChart() {
       return `<tspan x="0">${groupByOptionLabel}: ${data.data.key}</tspan>
                     <tspan x="0" dy="1.2em">${valueLabel}: ${data.data.value.value} EUR (${data.data.value.percentageValue}%)</tspan>`;
     },
-    placeHolderTooltip: null
+    placeHolderTooltip: null,
+    clickCallback: null
   };
 
   let width = initialConfiguration.width,
@@ -25,6 +26,7 @@ function pieChart() {
       valueLabel = initialConfiguration.valueLabel,
       colorScale = initialConfiguration.colorScale,
       placeHolderTooltip = initialConfiguration.placeHolderTooltip,
+      clickCallback = initialConfiguration.clickCallback,
       tooltipFormatter = initialConfiguration.tooltipFormatter;
   let updateData = null;
   let previousLabelY;
@@ -65,6 +67,7 @@ function pieChart() {
           .style('stroke', 'white');
 
       path.call(appendTooltip);
+      path.call(appendClickCallback);
 
       if (placeHolderTooltip) {
         showTooltip(placeHolderTooltip, 'white');
@@ -113,11 +116,13 @@ function pieChart() {
         const updatedLabel = pieChartSvg.selectAll('.label').data(updatedData);
         const updatedPolylines = pieChartSvg.selectAll('polyline').data(updatedData);
 
-        updatedPath.enter()
+        const enterPath = updatedPath.enter()
             .append('path')
             .attr('fill', (d) => colorScale(d.data.key))
-            .attr('d', arc)
-            .call(appendTooltip);
+            .attr('d', arc);
+        
+        enterPath.call(appendTooltip);
+        enterPath.call(appendClickCallback);
 
         updatedPath
             .transition()
@@ -230,6 +235,13 @@ function pieChart() {
             });
       }
 
+      function appendClickCallback(selection) {
+        selection
+            .on("click", (d) => {
+              clickCallback(d.data);
+            });
+      }
+
       function showTooltip(tooltipContent, color) {
         pieChartSvg.append('text')
             .attr('class', 'tooltipCircle')
@@ -279,6 +291,12 @@ function pieChart() {
   chart.colorScale = function (value) {
     if (!arguments.length) return colorScale;
     colorScale = value;
+    return chart;
+  };
+
+  chart.clickCallback = function (value) {
+    if (!arguments.length) return clickCallback;
+    clickCallback = value;
     return chart;
   };
 

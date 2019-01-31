@@ -23,6 +23,7 @@
           dynamicPieChart
               .groupByOptionLabel('Expense Type')
               .placeHolderTooltip(placeHolderTooltip)
+              .clickCallback(this.pieChartSectorClick)
               .data(this.expensesGroups);
           if (d3.select(this.$el).selectAll('svg').size() === 0) {
             d3.select(this.$el).call(dynamicPieChart);
@@ -30,7 +31,11 @@
         }
       }
     },
-    methods: {},
+    methods: {
+      pieChartSectorClick: function (d) {
+        this.$emit('select-pie-section', d);
+      }
+    },
     data() {
       return {
         expensesGroups: []
