@@ -6,6 +6,7 @@
   import * as d3 from 'd3';
   import pieChart from '../charts/PieChart';
   import ChartDataProcessor from '../services/ChartDataProcessor';
+  import ExpenseItem from "../enums/ExpenseItem";
 
   const chartDataProcessor = new ChartDataProcessor();
 
@@ -16,9 +17,9 @@
     watch: {
       data: function (newValue) {
         if (newValue.length > 0) {
-          this.expensesGroups = chartDataProcessor.processPieChartData(newValue, 'ExpenseType');
+          this.expensesGroups = chartDataProcessor.processPieChartData(newValue, ExpenseItem.EXPENSE_TYPE);
           const placeHolderTooltip = `<tspan x="0">${this.month}</tspan>
-                                <tspan x="0" dy="1.2em">Total spendings: <tspan font-weight="bold">${-1*d3.sum(newValue.map(d => d['Betrag in EUR']))} EUR</tspan></tspan>`;
+                                <tspan x="0" dy="1.2em">Total spendings: <tspan font-weight="bold">${-1 * d3.sum(newValue.map(d => d[ExpenseItem.PURCHASE_AMOUNT]))} EUR</tspan></tspan>`;
           dynamicPieChart
               .groupByOptionLabel('Expense Type')
               .placeHolderTooltip(placeHolderTooltip)
@@ -39,7 +40,7 @@
       dynamicPieChart = pieChart.pieChart()
           .width(900)
           .height(600)
-          .valueLabel('Betrag in EUR');
+          .valueLabel(ExpenseItem.PURCHASE_AMOUNT);
 
     }
   }

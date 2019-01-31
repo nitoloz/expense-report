@@ -40,7 +40,8 @@
     },
     methods: {
       onSelectType: function (type) {
-        db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()).update({ExpenseType: type});
+        db.collection('expenses').doc(this.selectedMonth).collection('data')
+            .doc(this.currentExpenseIndex.toString()).update({ExpenseType: type});
         this.viewNext();
       },
       viewPrevious: function () {
