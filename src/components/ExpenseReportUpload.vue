@@ -27,7 +27,8 @@
           db.collection('expenses').doc(fileName).delete();
           db.collection('expenses').doc(fileName).set({uploaded: new Date()});
 
-          let spendings = uploadFileProcessor.processUploadedFile(reader.result);
+          let spendings = uploadFileProcessor.processUploadedFile(reader.result)
+              .concat(uploadFileProcessor.extendReportWithMonthlyExpenses(fileName));
           spendings.forEach((expense, index) => db.collection('expenses').doc(fileName).collection('data').doc(index.toString()).set(expense));
         };
         reader.readAsText(this.$refs.fileInput.files[0]);

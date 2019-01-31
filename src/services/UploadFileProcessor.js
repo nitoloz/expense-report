@@ -1,3 +1,5 @@
+import ExpenseTypes from '../enums/ExpenseTypes';
+
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default class UploadFileProcessor {
@@ -18,5 +20,59 @@ export default class UploadFileProcessor {
   processFileName(fileName) {
     const splitFileName = fileName.substring(23, 33).split('-');
     return `${months[parseInt(splitFileName[1]) - 1]} ${splitFileName[0]}`;
+  }
+
+  extendReportWithMonthlyExpenses(expenseMonth) {
+    return [
+      {
+        'Betrag in EUR': -720,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Flat payment"
+      },
+      {
+        'Betrag in EUR': -69,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Gas payment"
+      },
+      {
+        'Betrag in EUR': -58,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Electricity payment"
+      },
+      {
+        'Betrag in EUR': -26,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Klarmobil mobile"
+      },
+      {
+        'Betrag in EUR': -13,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "PremiumSIM mobile"
+      },
+      {
+        'Betrag in EUR': -35,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Fitness 7/11"
+      },
+      {
+        'Betrag in EUR': -20,
+        'Konto-/Kartennummer': "434499xxxxxx7017",
+        ExpenseType: ExpenseTypes.HAUS,
+        Kaufdatum: expenseMonth,
+        'Umsatz/Ort': "Internet Unitymedia"
+      }
+    ]
   }
 }
