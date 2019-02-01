@@ -6,22 +6,7 @@
                 <PieChart :data="expenses" :month="selectedMonth" v-on:select-pie-section="selectPieChartSection"/>
             </div>
             <div class="col-md-4">
-                <table class="table table-sm">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ExpenseItem.EXPENSE_NAME}}</th>
-                        <th scope="col">{{ExpenseItem.PURCHASE_AMOUNT}}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(expense,index) in expensesSection" class="text-left">
-                        <th scope="row">{{index+1}}</th>
-                        <td>{{expense[ExpenseItem.EXPENSE_NAME]}}</td>
-                        <td>{{expense[ExpenseItem.PURCHASE_AMOUNT]}} EUR</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <ExpenseList :expensesSection="expensesSection"/>
             </div>
         </div>
     </div>
@@ -32,13 +17,15 @@
   import {db} from '../main'
   import PieChart from './PieChart';
   import ExpenseReportSelector from './ExpenseReportSelector';
+  import ExpenseList from './ExpenseList';
   import ExpenseItem from '../enums/ExpenseItem';
 
   export default {
     name: 'Charts',
     components: {
       PieChart,
-      ExpenseReportSelector
+      ExpenseReportSelector,
+      ExpenseList
     },
     methods: {
       selectMonth: function (event) {
