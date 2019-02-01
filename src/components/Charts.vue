@@ -1,11 +1,11 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-lg-7">
                 <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
                 <PieChart :data="expenses" :month="selectedMonth" v-on:select-pie-section="selectPieChartSection"/>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-5 expenses-list">
                 <ExpenseList :expensesSection="expensesSection"/>
             </div>
         </div>
@@ -31,11 +31,16 @@
       selectMonth: function (event) {
         this.selectedMonth = event.target.value;
         this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
+        this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
+            .orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
       },
       selectPieChartSection: function (data) {
-        this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
-            .where(ExpenseItem.EXPENSE_TYPE, "==", data.key).orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
-
+        if (data.key === 'Other') {
+          this.expensesSection = [];
+        } else {
+          this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
+              .where(ExpenseItem.EXPENSE_TYPE, "==", data.key).orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
+        }
       }
     },
     data() {
@@ -57,5 +62,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    .expenses-list {
+        max-height: 600px;
+        overflow-y: auto;
+    }
 </style>

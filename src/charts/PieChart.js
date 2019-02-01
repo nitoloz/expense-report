@@ -46,12 +46,12 @@ function pieChart() {
 
       const arc = d3.arc()
           .innerRadius(radius * 0.5)
-          .outerRadius(radius * 0.8)
+          .outerRadius(radius * 0.75)
           .cornerRadius(8);
 
       const outerArc = d3.arc()
-          .outerRadius(radius * 0.8)
-          .innerRadius(radius * 0.9);
+          .outerRadius(radius * 0.75)
+          .innerRadius(radius * 0.85);
 
       const pie = d3.pie()
           .value(d => d.value.value)
@@ -85,7 +85,7 @@ function pieChart() {
           })
           .attr('transform', function (d) {
             let pos = outerArc.centroid(d);
-            pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+            pos[0] = radius * 0.8 * (midAngle(d) < Math.PI ? 1 : -1);
             pos[1] = previousLabelY && (Math.abs(previousLabelY - pos[1]) < 20) ? previousLabelY - 20 : pos[1];
             previousLabelY = pos[1];
             return 'translate(' + pos + ')';
@@ -104,7 +104,7 @@ function pieChart() {
           .attr('stroke', 'black')
           .attr('points', function (d) {
             let pos = outerArc.centroid(d);
-            pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+            pos[0] = radius * 0.8 * (midAngle(d) < Math.PI ? 1 : -1);
             pos[1] = previousLabelY && (Math.abs(previousLabelY - pos[1]) < 20) ? previousLabelY - 20 : pos[1];
             previousLabelY = pos[1];
             return [arc.centroid(d), [outerArc.centroid(d)[0], pos[1]], pos]
@@ -187,7 +187,7 @@ function pieChart() {
         previousLabelY = null;
         pieChartSvg.selectAll('.label').attr('transform', function (d) {
           let pos = outerArc.centroid(d);
-          pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+          pos[0] = radius * 0.8 * (midAngle(d) < Math.PI ? 1 : -1);
           pos[1] = previousLabelY && (Math.abs(previousLabelY - pos[1]) < 20) ? previousLabelY - 20 : pos[1];
           previousLabelY = pos[1];
           return 'translate(' + pos + ')';
@@ -196,7 +196,7 @@ function pieChart() {
         previousLabelY = null;
         pieChartSvg.selectAll('polyline').attr('points', function (d) {
           let pos = outerArc.centroid(d);
-          pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+          pos[0] = radius * 0.8 * (midAngle(d) < Math.PI ? 1 : -1);
           pos[1] = previousLabelY && (Math.abs(previousLabelY - pos[1]) < 20) ? previousLabelY - 20 : pos[1];
           previousLabelY = pos[1];
           return [arc.centroid(d), [outerArc.centroid(d)[0], pos[1]], pos]

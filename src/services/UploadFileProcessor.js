@@ -58,7 +58,8 @@ export default class UploadFileProcessor {
   autoClassifyExpenses(expenses) {
     expenses.filter(expense => !expense[ExpenseItem.EXPENSE_TYPE]).forEach(expense => {
       const autoSelectedType = autoSelectedTypes.find(type =>
-          type.expenses.some(classifiedExpense => expense[ExpenseItem.EXPENSE_NAME].toLowerCase().indexOf(classifiedExpense) !== -1));
+          type.expenses.some(classifiedExpense =>
+              expense[ExpenseItem.EXPENSE_NAME].toLowerCase().indexOf(classifiedExpense) !== -1));
       if (autoSelectedType) {
         expense[ExpenseItem.EXPENSE_TYPE] = autoSelectedType.type
       }

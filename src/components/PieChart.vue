@@ -43,7 +43,7 @@
     },
     created() {
       dynamicPieChart = pieChart.pieChart()
-          .width(900)
+          .width(880)
           .height(600)
           .valueLabel(ExpenseItem.PURCHASE_AMOUNT);
 
