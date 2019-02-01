@@ -120,7 +120,7 @@ function pieChart() {
             .append('path')
             .attr('fill', (d) => colorScale(d.data.key))
             .attr('d', arc);
-        
+
         enterPath.call(appendTooltip);
         enterPath.call(appendClickCallback);
 
@@ -254,7 +254,8 @@ function pieChart() {
             .attr('class', 'tooltipCircle')
             .attr('r', radius * 0.45)
             .style('fill', color)
-            .style('fill-opacity', 0.35);
+            .style('fill-opacity', 0.35)
+            .call(appendClickCallback);
       }
 
       function midAngle(d) {

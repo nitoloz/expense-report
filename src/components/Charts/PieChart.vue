@@ -53,7 +53,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    >>> path:hover {
+    >>> path:hover,
+    >>> circle:hover {
         cursor: pointer;
     }
 

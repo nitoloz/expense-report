@@ -31,15 +31,26 @@
       selectMonth: function (event) {
         this.selectedMonth = event.target.value;
         this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
-        this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
-            .orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
+        this.fetchSectionExpenses();
       },
       selectPieChartSection: function (data) {
-        if (data.key === 'Other') {
-          this.expensesSection = [];
+        if (!data) {
+          this.fetchSectionExpenses();
+        } else {
+          if (data.key === 'Other') {
+            this.expensesSection = [];
+          } else {
+            this.fetchSectionExpenses(data);
+          }
+        }
+      },
+      fetchSectionExpenses: function (section) {
+        if (section) {
+          this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
+              .where(ExpenseItem.EXPENSE_TYPE, "==", section.key).orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"))
         } else {
           this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
-              .where(ExpenseItem.EXPENSE_TYPE, "==", data.key).orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
+              .orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
         }
       }
     },
