@@ -9,8 +9,8 @@
 </template>
 
 <script>
-  import {db} from '../main'
-  import UploadFileProcessor from '../services/UploadFileProcessor';
+  import {db} from '../../main'
+  import UploadFileProcessor from '../../services/UploadFileProcessor';
 
   const uploadFileProcessor = new UploadFileProcessor();
 

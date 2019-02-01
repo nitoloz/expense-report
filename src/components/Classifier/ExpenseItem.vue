@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import ExpenseItem from '../enums/ExpenseItem.js';
+  import ExpenseItem from '../../enums/ExpenseItem.js';
 
   export default {
     name: 'ExpenseItem',

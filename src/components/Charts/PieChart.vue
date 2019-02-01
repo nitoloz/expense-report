@@ -4,9 +4,9 @@
 
 <script>
   import * as d3 from 'd3';
-  import pieChart from '../charts/PieChart';
-  import ChartDataProcessor from '../services/ChartDataProcessor';
-  import ExpenseItem from "../enums/ExpenseItem";
+  import pieChart from '../../charts/PieChart';
+  import ChartDataProcessor from '../../services/ChartDataProcessor';
+  import ExpenseItem from "../../enums/ExpenseItem";
 
   const chartDataProcessor = new ChartDataProcessor();
 

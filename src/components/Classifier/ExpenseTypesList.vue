@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import ExpenseTypes from '../enums/ExpenseTypes';
+  import ExpenseTypes from '../../enums/ExpenseTypes';
 
   export default {
     name: 'ExpenseTypesList',

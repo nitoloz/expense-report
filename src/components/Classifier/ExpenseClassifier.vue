@@ -26,8 +26,8 @@
   import ExpenseItem from './ExpenseItem.vue'
   import ExpenseTypesList from './ExpenseTypesList.vue'
   import ExpenseReportUpload from './ExpenseReportUpload.vue'
-  import ExpenseReportSelector from './ExpenseReportSelector.vue'
-  import {db} from '../main'
+  import ExpenseReportSelector from '../ExpenseReportSelector.vue'
+  import {db} from '../../main'
 
 
   export default {

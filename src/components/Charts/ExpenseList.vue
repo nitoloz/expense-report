@@ -19,7 +19,7 @@
 
 <script>
 
-  import ExpenseItem from '../enums/ExpenseItem';
+  import ExpenseItem from '../../enums/ExpenseItem';
 
   export default {
     name: 'ExpenseList',

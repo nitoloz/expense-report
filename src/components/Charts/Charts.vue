@@ -14,11 +14,11 @@
 
 <script>
 
-  import {db} from '../main'
+  import {db} from '../../main'
   import PieChart from './PieChart';
-  import ExpenseReportSelector from './ExpenseReportSelector';
+  import ExpenseReportSelector from '../ExpenseReportSelector';
   import ExpenseList from './ExpenseList';
-  import ExpenseItem from '../enums/ExpenseItem';
+  import ExpenseItem from '../../enums/ExpenseItem';
 
   export default {
     name: 'Charts',

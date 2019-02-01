@@ -5,8 +5,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import App from './App.vue'
-import ExpenseClassifier from './components/ExpenseClassifier.vue'
-import Charts from './components/Charts.vue'
+import ExpenseClassifier from './components/Classifier/ExpenseClassifier.vue'
+import Charts from './components/Charts/Charts.vue'
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
