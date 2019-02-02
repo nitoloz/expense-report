@@ -13,19 +13,31 @@
 </template>
 
 <script>
-  import ExpenseItem from '../../enums/ExpenseItem.js';
+    import ExpenseItem from '../../enums/ExpenseItem.js';
 
-  export default {
-    name: 'ExpenseItem',
-    props: {
-      item: Object
-    },
-    data() {
-      return {
-        ExpenseItem: ExpenseItem
-      }
+    export default {
+        name: 'ExpenseItem',
+        props: {
+            item: Object
+        },
+        data() {
+            return {
+                ExpenseItem: ExpenseItem
+            }
+        },
+        mounted() {
+            const that = this;
+            window.addEventListener('keydown', function (e) {
+                if (e.code === 'ArrowRight') {
+                    that.$emit('click-right');
+                }
+                if (e.code === 'ArrowLeft') {
+                    that.$emit('click-left');
+                }
+                e.preventDefault();
+            });
+        }
     }
-  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
