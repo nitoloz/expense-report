@@ -9,6 +9,9 @@
                 <li class="nav-item">
                     <router-link class="nav-link" active-class="active" to="/diagrams">Diagrams</router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" active-class="active" to="/preset">Preset</router-link>
+                </li>
                 <li class="nav-item ml-5">
                     <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
                 </li>
