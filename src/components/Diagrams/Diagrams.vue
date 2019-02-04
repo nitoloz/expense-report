@@ -8,7 +8,7 @@
                 <ExpenseList :expensesSection="expensesSection"/>
             </div>
         </div>
-        <h3 v-if="expensesSection.length === 0"> Please select expenses month to view diagram!</h3>
+        <h3 v-if="!selectedMonth"> Please select expenses month to view diagram!</h3>
 
     </div>
 </template>

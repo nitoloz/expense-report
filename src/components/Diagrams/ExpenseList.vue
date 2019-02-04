@@ -8,7 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(expense,index) in expensesSection" class="text-left">
+        <tr v-for="(expense,index) in expensesSection" :key="expense.id" class="text-left">
             <th scope="row">{{index+1}}</th>
             <td>{{expense[ExpenseItem.EXPENSE_NAME]}}</td>
             <td>{{expense[ExpenseItem.PURCHASE_AMOUNT]}} EUR</td>
