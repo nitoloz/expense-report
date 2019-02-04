@@ -4,4 +4,5 @@ export default class ExpenseItem {
   static PURCHASE_AMOUNT = 'Betrag in EUR';
   static PURCHASE_AMOUNT_SHORT = 'Betrag';
   static EXPENSE_TYPE = 'ExpenseType';
+  static EXPENSE_TYPE_LABEL = 'Expense Type';
 }
