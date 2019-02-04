@@ -34,12 +34,7 @@
     },
     watch: {
       selectedMonth: function () {
-        this.currentExpenseIndex = 0;
-        let that = this;
-        db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
-          that.selectedMonthSize = querySnapshot.size;
-        });
-        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
+        this.monthSelected();
       }
     },
     methods: {
@@ -55,6 +50,14 @@
       viewNext: function () {
         this.currentExpenseIndex = this.currentExpenseIndex < this.selectedMonthSize - 1 ? this.currentExpenseIndex + 1 : 0;
         this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
+      },
+      monthSelected: function () {
+        this.currentExpenseIndex = 0;
+        let that = this;
+        db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
+          that.selectedMonthSize = querySnapshot.size;
+        });
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       }
     },
     data() {
@@ -62,6 +65,11 @@
         currentExpenseIndex: 0,
         selectedExpense: {},
         selectedMonthSize: 0
+      }
+    },
+    mounted() {
+      if(this.selectedMonth){
+        this.monthSelected();
       }
     }
   }

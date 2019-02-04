@@ -2,7 +2,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-7">
-                <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
                 <PieChart :data="expenses" :month="selectedMonth" v-on:select-pie-section="selectPieChartSection"/>
             </div>
             <div class="col-lg-5 expenses-list">
@@ -16,23 +15,23 @@
 
   import {db} from '../../main'
   import PieChart from './PieChart';
-  import ExpenseReportSelector from '../ExpenseReportSelector';
   import ExpenseList from './ExpenseList';
   import ExpenseItem from '../../enums/ExpenseItem';
 
   export default {
     name: 'Charts',
+    props: {selectedMonth: String},
     components: {
       PieChart,
-      ExpenseReportSelector,
       ExpenseList
     },
-    methods: {
-      selectMonth: function (event) {
-        this.selectedMonth = event.target.value;
+    watch: {
+      selectedMonth: function () {
         this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
         this.fetchSectionExpenses();
-      },
+      }
+    },
+    methods: {
       selectPieChartSection: function (data) {
         if (!data) {
           this.fetchSectionExpenses();
@@ -52,20 +51,22 @@
           this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
               .orderBy(ExpenseItem.PURCHASE_AMOUNT, "asc"));
         }
+      },
+      monthSelected: function () {
+        this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
+        this.fetchSectionExpenses();
       }
     },
     data() {
       return {
-        selectedMonth: '',
         expenses: [],
         expensesSection: [],
-        firebaseExpenses: [],
         ExpenseItem: ExpenseItem
       }
     },
-    firestore() {
-      return {
-        firebaseExpenses: db.collection('expenses')
+    mounted() {
+      if(this.selectedMonth){
+        this.monthSelected();
       }
     }
   }
