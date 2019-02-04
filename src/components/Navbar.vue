@@ -9,14 +9,38 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/charts">Charts</router-link>
                 </li>
+                <li class="nav-item ml-5">
+                    <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
+                </li>
             </ul>
         </div>
     </nav>
 </template>
 
 <script>
+  import ExpenseReportSelector from './ExpenseReportSelector';
+  import {db} from '../main'
+
   export default {
-    name: 'Navbar'
+    name: 'Navbar',
+    components: {
+      ExpenseReportSelector
+    },
+    methods: {
+      selectMonth: function (event) {
+        this.$emit('select-month', event.target.value);
+      }
+    },
+    data() {
+      return {
+        firebaseExpenses: []
+      }
+    },
+    firestore() {
+      return {
+        firebaseExpenses: db.collection('expenses')
+      }
+    }
   }
 </script>
 

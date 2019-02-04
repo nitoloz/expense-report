@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar/>
-    <router-view></router-view>
+    <Navbar v-on:select-month="selectMonth"/>
+    <router-view :selectedMonth="selectedMonth"></router-view>
   </div>
 </template>
 
@@ -12,7 +12,17 @@ export default {
   name: 'app',
   components: {
       Navbar
-  }
+  },
+  methods: {
+    selectMonth: function (value) {
+      this.selectedMonth = value;
+    }
+  },
+  data() {
+    return {
+      selectedMonth: ''
+    }
+  },
 }
 </script>
 
