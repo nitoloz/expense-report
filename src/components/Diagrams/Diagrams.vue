@@ -19,7 +19,7 @@
   import ExpenseItem from '../../enums/ExpenseItem';
 
   export default {
-    name: 'Charts',
+    name: 'Diagrams',
     props: {selectedMonth: String},
     components: {
       PieChart,
