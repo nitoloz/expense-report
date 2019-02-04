@@ -1,16 +1,12 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
-            </div>
-            <h4 class="col-sm-2">
+            <h4 class="col-sm-9">
                 <span v-if="selectedMonth">({{currentExpenseIndex+1}}/{{selectedMonthSize}})</span>
             </h4>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <ExpenseReportUpload/>
             </div>
-
         </div>
         <ExpenseItem v-if="selectedMonth"
                      :item="selectedExpense"
@@ -26,17 +22,25 @@
   import ExpenseItem from './ExpenseItem.vue'
   import ExpenseTypesList from './ExpenseTypesList.vue'
   import ExpenseReportUpload from './ExpenseReportUpload.vue'
-  import ExpenseReportSelector from '../ExpenseReportSelector.vue'
   import {db} from '../../main'
-
 
   export default {
     name: 'ExpenseClassifier',
+    props: {selectedMonth: String},
     components: {
       ExpenseItem,
       ExpenseTypesList,
-      ExpenseReportUpload,
-      ExpenseReportSelector
+      ExpenseReportUpload
+    },
+    watch: {
+      selectedMonth: function () {
+        this.currentExpenseIndex = 0;
+        let that = this;
+        db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
+          that.selectedMonthSize = querySnapshot.size;
+        });
+        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
+      }
     },
     methods: {
       onSelectType: function (type) {
@@ -51,29 +55,13 @@
       viewNext: function () {
         this.currentExpenseIndex = this.currentExpenseIndex < this.selectedMonthSize - 1 ? this.currentExpenseIndex + 1 : 0;
         this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
-      },
-      selectMonth: function (event) {
-        this.selectedMonth = event.target.value;
-        this.currentExpenseIndex = 0;
-        let that = this;
-        db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
-          that.selectedMonthSize = querySnapshot.size;
-        });
-        this.$bind('selectedExpense', db.collection('expenses').doc(this.selectedMonth).collection('data').doc(this.currentExpenseIndex.toString()));
       }
     },
     data() {
       return {
         currentExpenseIndex: 0,
-        selectedMonth: '',
-        firebaseExpenses: [],
         selectedExpense: {},
         selectedMonthSize: 0
-      }
-    },
-    firestore() {
-      return {
-        firebaseExpenses: db.collection('expenses')
       }
     }
   }
