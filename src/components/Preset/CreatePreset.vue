@@ -20,7 +20,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary mt-32" @click="addExpense">Add expense</button>
+                    <button type="submit" class="btn btn-primary mt-32 float-right" @click="addExpense">Add expense</button>
                 </div>
             </div>
         </form>
@@ -39,7 +39,9 @@
         components: {},
         methods: {
             addExpense: function () {
+                this.newExpense[ExpenseItem.PURCHASE_AMOUNT] = -parseInt(this.newExpense[ExpenseItem.PURCHASE_AMOUNT]);
                 db.collection('presetExpenses').add(this.newExpense);
+                this.newExpense = {[ExpenseItem.EXPENSE_TYPE]: ''};
             }
         },
         data() {
