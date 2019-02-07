@@ -17,9 +17,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" v-if="user">
+                    <a class="nav-link" href="" @click="logout">Logout</a>
+                </li>
+                <li class="nav-item" v-else>
                     <router-link class="nav-link" active-class="active" to="/login">Login</router-link>
                 </li>
+
             </ul>
         </div>
     </nav>
@@ -28,7 +32,8 @@
 <script>
   import ExpenseReportSelector from './ExpenseReportSelector';
   import {db} from '../main'
-  import firebase from 'firebase'
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
 
   export default {
     name: 'Navbar',
@@ -38,6 +43,11 @@
     methods: {
       selectMonth: function (event) {
         this.$emit('select-month', event.target.value);
+      },
+      logout: function () {
+        firebase.auth().signOut().then((result) => {
+          this.$router.push('/login')
+        });
       }
     },
     data() {
