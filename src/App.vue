@@ -7,7 +7,6 @@
 
 <script>
   import Navbar from './components/Navbar.vue'
-  import firebase from 'firebase'
 
   export default {
     name: 'app',
@@ -23,11 +22,6 @@
       return {
         selectedMonth: ''
       }
-    },
-    mounted() {
-      // const provider = new firebase.auth.GoogleAuthProvider();
-      //
-      // firebase.auth().signInWithPopup(provider).then((result) => console.log(result));
     }
   }
 </script>

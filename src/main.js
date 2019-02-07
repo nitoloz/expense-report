@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import App from './App.vue'
-import router from './router';
+import {router} from './router';
 
 Vue.config.productionTip = false;
 Vue.use(VueFire);
