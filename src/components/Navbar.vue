@@ -16,9 +16,11 @@
                     <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
                 </li>
             </ul>
+
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" v-if="user">
-                    <a class="nav-link" href="" @click="logout">Logout</a>
+                <span class="navbar-text" v-if="user">{{user.displayName}}</span>
+                <li class="nav-item ml-5" v-if="user">
+                    <a class="btn btn-light" href="" @click="logout">Logout</a>
                 </li>
                 <li class="nav-item" v-else>
                     <router-link class="nav-link" active-class="active" to="/login">Login</router-link>

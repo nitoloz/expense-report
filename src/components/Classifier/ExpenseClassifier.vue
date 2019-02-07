@@ -14,7 +14,7 @@
                      v-on:click-right="viewNext"/>
         <ExpenseTypesList v-if="selectedMonth" :selectedType="selectedExpense.ExpenseType"
                           v-on:select-type="onSelectType"/>
-        <h3 v-else> Please select expenses month to start classification!</h3>
+        <h3 v-else> Please select expenses month to start classification or upload new file!</h3>
     </div>
 </template>
 
