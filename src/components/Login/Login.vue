@@ -1,23 +1,26 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 offset-sm-4 text-left">
+            <div class="col-md-4 offset-md-4 col-sm-8 offset-sm-2 text-left">
                 <div class="card mt-5">
                     <div class="card-body">
                         <h3 class="text-center">Sign In</h3>
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email address">
+                                <input type="email" class="form-control" placeholder="Email address" v-model="email">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="formGroupExampleInput2"
-                                       placeholder="Password">
+                                <input type="password" class="form-control" id="formGroupExampleInput2"
+                                       v-model="password" placeholder="Password">
                             </div>
-                            <button type="button" class="btn btn-primary btn-block">Sign in</button>
+                            <button type="button" class="btn btn-primary btn-block" @click="signIn">Sign in</button>
                         </form>
                         <hr/>
-                        <button type="button" class="btn btn-danger btn-block">Sign in with Google</button>
-                        <button type="button" class="btn btn-dark btn-block">Sign in with Github</button>
+                        <button type="button" class="btn btn-danger btn-block" @click="googleSignIn">Sign in with
+                            Google
+                        </button>
+                        <button type="button" class="btn btn-dark btn-block" @click="githubSignIn">Sign in with Github
+                        </button>
                     </div>
                 </div>
             </div>
@@ -27,17 +30,25 @@
 
 <script>
 
-  import {db} from '../../main'
-  import ExpenseItem from '../../enums/ExpenseItem';
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
 
-
+  //
   export default {
     name: 'Login',
     props: {},
     components: {},
     methods: {
       signIn: function () {
-        console.log('Signed in');
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((result) => this.$router.push('/expenses'));
+      },
+      googleSignIn: function () {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then((result) => this.$router.push('/expenses'));
+      },
+      githubSignIn: function () {
+        const provider = new firebase.auth.GithubAuthProvider();
+        firebase.auth().signInWithPopup(provider).then((result) => this.$router.push('/expenses'));
       }
     },
     data() {
@@ -45,11 +56,6 @@
         email: '',
         password: ''
       }
-    },
-    mounted() {
-      // if (this.selectedMonth) {
-      //     this.monthSelected();
-      // }
     }
   }
 </script>
