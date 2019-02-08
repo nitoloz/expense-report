@@ -33,22 +33,21 @@
   import firebase from 'firebase/app';
   import 'firebase/auth';
 
-  //
   export default {
     name: 'Login',
     props: {},
     components: {},
     methods: {
       signIn: function () {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((result) => this.$router.push('/expenses'));
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => this.$router.push('/expenses'));
       },
       googleSignIn: function () {
         const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then((result) => this.$router.push('/expenses'));
+        firebase.auth().signInWithPopup(provider).then(() => this.$router.push('/expenses'));
       },
       githubSignIn: function () {
         const provider = new firebase.auth.GithubAuthProvider();
-        firebase.auth().signInWithPopup(provider).then((result) => this.$router.push('/expenses'));
+        firebase.auth().signInWithPopup(provider).then(() => this.$router.push('/expenses'));
       }
     },
     data() {

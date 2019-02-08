@@ -47,7 +47,7 @@
         this.$emit('select-month', event.target.value);
       },
       logout: function () {
-        firebase.auth().signOut().then((result) => {
+        firebase.auth().signOut().then(() => {
           this.$router.push('/login')
         });
       }
