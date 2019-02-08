@@ -26,12 +26,16 @@
         reader.onload = function () {
           db.collection('expenses').doc(fileName).delete();
           db.collection('expenses').doc(fileName).set({uploaded: new Date()});
+          const expenses = uploadFileProcessor.processUploadedFile(reader.result);
+            let autoClassifiedExpenses = uploadFileProcessor.autoClassifyExpenses(expenses);
 
-          const spendings = uploadFileProcessor.processUploadedFile(reader.result);
-          let autoClassifiedSpendings = uploadFileProcessor.autoClassifyExpenses(spendings);
-          autoClassifiedSpendings = autoClassifiedSpendings.concat(uploadFileProcessor.extendReportWithMonthlyExpenses(fileName));
-          autoClassifiedSpendings.forEach((expense, index) => db.collection('expenses')
-              .doc(fileName).collection('data').doc(index.toString()).set(expense));
+            db.collection("presetExpenses").get().then(function(presetExpenses) {
+                presetExpenses.forEach(function(presetExpense) {
+                    autoClassifiedExpenses.push(presetExpense.data())
+                });
+                autoClassifiedExpenses.forEach((expense, index) => db.collection('expenses')
+                    .doc(fileName).collection('data').doc(index.toString()).set(expense))
+            });
         };
         reader.readAsText(this.$refs.fileInput.files[0]);
       }
