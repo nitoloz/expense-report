@@ -56,7 +56,7 @@
         firebase.auth().signInWithPopup(provider).then(() => this.$router.push('/expenses'));
       },
       signUp: function () {
-        // this.$router.push('/signup')
+        this.$router.push('/signup')
       }
     },
     data() {
@@ -68,7 +68,9 @@
     mounted() {
       let that = this;
       firebase.auth().onAuthStateChanged(function (user) {
-        that.$router.push('/expenses');
+        if (user) {
+          that.$router.push('/expenses');
+        }
       });
     }
   }
