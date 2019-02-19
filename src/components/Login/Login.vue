@@ -55,6 +55,12 @@
         email: '',
         password: ''
       }
+    },
+    mounted() {
+      let that = this;
+      firebase.auth().onAuthStateChanged(function (user) {
+        that.$router.push('/expenses');
+      });
     }
   }
 </script>
