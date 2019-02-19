@@ -18,7 +18,7 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <span class="navbar-text" v-if="user">{{user.displayName}}</span>
+                <span class="navbar-text" v-if="user">{{user.displayName || user.email}}</span>
                 <li class="nav-item ml-5" v-if="user">
                     <a class="btn btn-light" href="" @click="logout">Logout</a>
                 </li>
