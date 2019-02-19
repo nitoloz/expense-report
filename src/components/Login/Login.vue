@@ -21,6 +21,12 @@
                         </button>
                         <button type="button" class="btn btn-dark btn-block" @click="githubSignIn">Sign in with Github
                         </button>
+                        <hr/>
+                        <div class="text-center">
+                            Don't have an account yet?
+                            <button type="button" class="btn btn-link no-vertical-align" @click="signUp">Sign Up
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,6 +54,9 @@
       githubSignIn: function () {
         const provider = new firebase.auth.GithubAuthProvider();
         firebase.auth().signInWithPopup(provider).then(() => this.$router.push('/expenses'));
+      },
+      signUp: function () {
+        // this.$router.push('/signup')
       }
     },
     data() {
@@ -67,5 +76,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    .no-vertical-align {
+        vertical-align: initial;
+    }
 </style>

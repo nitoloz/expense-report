@@ -23,7 +23,7 @@
                     <a class="btn btn-light" href="" @click="logout">Logout</a>
                 </li>
                 <li class="nav-item" v-else>
-                    <router-link class="nav-link" active-class="active" to="/login">Login</router-link>
+                    <router-link class="nav-link" active-class="active" to="/login">Sign In</router-link>
                 </li>
 
             </ul>
