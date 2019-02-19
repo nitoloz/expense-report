@@ -8,7 +8,7 @@
                 <ExpenseReportUpload/>
             </div>
         </div>
-        <ExpenseItem v-if="selectedMonth"
+        <ExpenseItem v-if="selectedMonth && selectedExpense"
                      :item="selectedExpense"
                      v-on:click-left="viewPrevious"
                      v-on:click-right="viewNext"/>
