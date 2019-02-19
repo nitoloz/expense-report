@@ -24,26 +24,11 @@
     name: 'Preset',
     props: {selectedMonth: String},
     components: {PresetList, CreatePreset},
-    // watch: {
-    //     selectedMonth: function () {
-    //         this.monthSelected();
-    //     }
-    // },
-    methods: {
-      // monthSelected: function () {
-      //     this.$bind('expenses', db.collection('expenses').doc(this.selectedMonth).collection('data'));
-      // }
-    },
     data() {
       return {
         presetExpenses: [],
         ExpenseItem: ExpenseItem
       }
-    },
-    mounted() {
-      // if (this.selectedMonth) {
-      //     this.monthSelected();
-      // }
     },
     firestore() {
       return {
