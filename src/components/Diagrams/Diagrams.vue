@@ -8,6 +8,12 @@
                 <ExpenseList :expensesSection="expensesSection"/>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <BarChart :data="expenses"/>
+            </div>
+
+        </div>
         <h3 v-if="!selectedMonth"> Please select expenses month to view diagram!</h3>
 
     </div>
@@ -17,6 +23,7 @@
 
     import {db} from '../../main'
     import PieChart from './PieChart';
+    import BarChart from './BarChart';
     import ExpenseList from './ExpenseList';
     import ExpenseItem from '../../enums/ExpenseItem';
 
@@ -25,6 +32,7 @@
         props: {selectedMonth: String},
         components: {
             PieChart,
+            BarChart,
             ExpenseList
         },
         watch: {
