@@ -4,11 +4,11 @@
 
 <script>
   import * as d3 from 'd3';
-  import pieChart from '../../charts/PieChart';
-  import ChartDataProcessor from '../../services/ChartDataProcessor';
+  import stackedBarChart from '../../charts/StackedBarChart';
+  // import ChartDataProcessor from '../../services/ChartDataProcessor';
   import ExpenseItem from "../../enums/ExpenseItem";
 
-  const chartDataProcessor = new ChartDataProcessor();
+  // const chartDataProcessor = new ChartDataProcessor();
 
   let barChart;
   export default {
@@ -18,16 +18,12 @@
       data: function (newValue) {
         if (newValue.length > 0) {
           // this.expensesGroups = chartDataProcessor.processPieChartData(newValue, ExpenseItem.EXPENSE_TYPE);
-          // const placeHolderTooltip = `<tspan x="0">${this.month}</tspan>
-          //                       <tspan x="0" dy="1.2em">Total spendings: <tspan font-weight="bold">${-1 * d3.sum(newValue.map(d => d[ExpenseItem.PURCHASE_AMOUNT]))} EUR</tspan></tspan>`;
-          // dynamicPieChart
-          //     .groupByOptionLabel('Expense Type')
-          //     .placeHolderTooltip(placeHolderTooltip)
-          //     .clickCallback(this.pieChartSectorClick)
-          //     .data(this.expensesGroups);
-          // if (d3.select(this.$el).selectAll('svg').size() === 0) {
-          //   d3.select(this.$el).call(dynamicPieChart);
-          // }
+                barChart
+                    .data([]);
+              // .data(this.expensesGroups);
+          if (d3.select(this.$el).selectAll('svg').size() === 0) {
+            d3.select(this.$el).call(barChart);
+          }
         }
       }
     },
@@ -37,10 +33,9 @@
       }
     },
     created() {
-      // dynamicPieChart = pieChart.pieChart()
-      //     .width(880)
-      //     .height(600)
-      //     .valueLabel(ExpenseItem.PURCHASE_AMOUNT);
+        barChart = stackedBarChart.stackedBarChart()
+          .width(1500)
+          .height(600);
 
     }
   }
