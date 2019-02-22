@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import {expensesColorScale} from 'Utils';
+import {expensesColorScale} from './Utils';
 
 function pieChart() {
 
