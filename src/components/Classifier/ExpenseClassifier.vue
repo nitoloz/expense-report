@@ -5,6 +5,7 @@
                 <span v-if="selectedMonth">({{currentExpenseIndex+1}}/{{selectedMonthSize}})</span>
             </h4>
             <div class="col-sm-3">
+                <MonthlyExpenseReportProcessor/>
                 <ExpenseReportUpload/>
             </div>
         </div>
@@ -22,6 +23,7 @@
   import ExpenseItem from './ExpenseItem.vue'
   import ExpenseTypesList from './ExpenseTypesList.vue'
   import ExpenseReportUpload from './ExpenseReportUpload.vue'
+  import MonthlyExpenseReportProcessor from './MonthlyExpenseReportProcessor.vue'
   import {db} from '../../main'
 
   export default {
@@ -30,7 +32,8 @@
     components: {
       ExpenseItem,
       ExpenseTypesList,
-      ExpenseReportUpload
+      ExpenseReportUpload,
+      MonthlyExpenseReportProcessor
     },
     watch: {
       selectedMonth: function () {
