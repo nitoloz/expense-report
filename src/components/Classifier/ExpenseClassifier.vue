@@ -5,7 +5,7 @@
                 <span v-if="selectedMonth">({{currentExpenseIndex+1}}/{{selectedMonthSize}})</span>
             </h4>
             <div class="col-sm-3">
-                <MonthlyExpenseReportProcessor/>
+                <MonthlyExpenseReportProcessor :selectedMonth="selectedMonth"/>
                 <ExpenseReportUpload/>
             </div>
         </div>
