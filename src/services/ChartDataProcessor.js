@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import ExpenseItem from "../enums/ExpenseItem";
+import {expenseTypesArray} from "../enums/ExpenseTypes";
 
 const OTHERS_GROUP = 'Other';
 
@@ -36,7 +37,7 @@ export default class ChartDataProcessor {
 
     processStackedBarChartData(data) {
         return data.map(d => {
-            return {month: d.id, data: d.expenseTypes}
+            return {key: d.id, data: d.expenseTypes, total: d3.sum(expenseTypesArray.map(type => d.expenseTypes[type]))}
         })
     }
 }
