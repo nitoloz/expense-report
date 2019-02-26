@@ -14,6 +14,6 @@ export default class ExpenseTypes {
 }
 
 export const expenseTypesArray = [
-    'Lebensmittel', 'Restaurants', 'Transport', 'Reisen', 'Haus', 'Unterhaltung',
-    'Shopping', 'Lehre', 'Medizin', 'Haushaltswaren', 'Sonstig', 'Other'
+    ExpenseTypes.LEBENSMITTEL, ExpenseTypes.RESTAURANTS, ExpenseTypes.TRANSPORT, ExpenseTypes.REISEN, ExpenseTypes.HAUS, ExpenseTypes.UNTERHALTUNG,
+    ExpenseTypes.SHOPPING, ExpenseTypes.LEHRE, ExpenseTypes.MEDIZIN, ExpenseTypes.HAUSHALTSWAREN, ExpenseTypes.SONSTIG, ExpenseTypes.OTHER
 ];
