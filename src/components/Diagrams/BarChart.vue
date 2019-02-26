@@ -5,10 +5,9 @@
 <script>
   import * as d3 from 'd3';
   import stackedBarChart from '../../charts/StackedBarChart';
-  // import ChartDataProcessor from '../../services/ChartDataProcessor';
-  import ExpenseItem from "../../enums/ExpenseItem";
+  import ChartDataProcessor from '../../services/ChartDataProcessor';
 
-  // const chartDataProcessor = new ChartDataProcessor();
+  const chartDataProcessor = new ChartDataProcessor();
 
   let barChart;
   export default {
@@ -17,7 +16,7 @@
     watch: {
       data: function (newValue) {
         if (newValue.length > 0) {
-          // this.expensesGroups = chartDataProcessor.processPieChartData(newValue, ExpenseItem.EXPENSE_TYPE);
+          this.expensesGroups = chartDataProcessor.processStackedBarChartData(newValue);
                 barChart
                     .data([]);
               // .data(this.expensesGroups);

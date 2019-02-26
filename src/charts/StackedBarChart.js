@@ -32,18 +32,18 @@ function stackedBarChart() {
                 .attr('height', height)
                 .attr('width', width);
 
-            const xDomainValues = [...new Set(data.map(group => group.values.map(v => parseInt(v.key))).flat())].sort((a, b) => a - b);
-            const yDomainValues = data.map(group => group.values.map(v => parseInt(v.value))).flat();
+            const xDomainValues = data.map(group => group.key);
+            const yDomainValues = data.map(group => group.total);
 
             const groupsScale = d3.scaleBand()
                 .rangeRound([margin.left, width - margin.right])
                 .paddingInner(0.1)
                 .domain(xDomainValues);
 
-            const innerGroupScale = d3.scaleBand()
-                .padding(0.05)
-                .domain(data.map(group => group.key))
-                .rangeRound([0, groupsScale.bandwidth()]);
+            // const innerGroupScale = d3.scaleBand()
+            //     .padding(0.05)
+            //     .domain(data.map(group => group.key))
+            //     .rangeRound([0, groupsScale.bandwidth()]);
 
             const yScale = d3.scaleLinear()
                 .domain([d3.min(yDomainValues), d3.max(yDomainValues)])
@@ -85,9 +85,9 @@ function stackedBarChart() {
                 .data(data)
                 .enter()
                 .selectAll("rect")
-                .data(d => d.values)
+                .data(d => d.data)
                 .enter().append("rect")
-                .attr("x", d => innerGroupScale(d.groupKey) + groupsScale(d.key))
+                .attr("x", d => innerGroupScale(d.key) + groupsScale(d.key))
                 .attr("y", d => yScale(d.value))
                 .attr("width", innerGroupScale.bandwidth())
                 .attr("height", d => height - yScale(d.value) - margin.bottom)
