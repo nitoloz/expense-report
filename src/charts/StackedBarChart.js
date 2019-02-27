@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import d3Tip from 'd3-tip'
-
+import {expenseTypesArray} from '../enums/ExpenseTypes';
 import {expensesColorScale, margin, ChartUtils} from "./Utils";
 
 function stackedBarChart() {
@@ -79,6 +79,7 @@ function stackedBarChart() {
                 .html(tooltipFormatter);
 
             barChartSvg.call(tooltip);
+            let stackedData = d3.stack().keys(expenseTypesArray)(data);
 
             barChartSvg.append("g")
                 .selectAll("g")

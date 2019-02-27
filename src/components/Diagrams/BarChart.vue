@@ -18,8 +18,8 @@
         if (newValue.length > 0) {
           this.expensesGroups = chartDataProcessor.processStackedBarChartData(newValue);
                 barChart
-                    .data([]);
-              // .data(this.expensesGroups);
+                    // .data([]);
+              .data(this.expensesGroups);
           if (d3.select(this.$el).selectAll('svg').size() === 0) {
             d3.select(this.$el).call(barChart);
           }
