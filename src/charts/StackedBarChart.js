@@ -46,7 +46,7 @@ function stackedBarChart() {
             //     .rangeRound([0, groupsScale.bandwidth()]);
 
             const yScale = d3.scaleLinear()
-                .domain([d3.min(yDomainValues), d3.max(yDomainValues)])
+                .domain([0, d3.max(yDomainValues)])
                 .range([height - margin.top, margin.bottom]);
 
             const xAxis = d3.axisBottom(groupsScale)
@@ -83,16 +83,18 @@ function stackedBarChart() {
 
             barChartSvg.append("g")
                 .selectAll("g")
-                .data(data)
+                .data(stackedData)
                 .enter()
                 .selectAll("rect")
-                .data(d => d.data)
+                .data(d => d)
                 .enter().append("rect")
-                .attr("x", d => innerGroupScale(d.key) + groupsScale(d.key))
-                .attr("y", d => yScale(d.value))
-                .attr("width", innerGroupScale.bandwidth())
-                .attr("height", d => height - yScale(d.value) - margin.bottom)
-                .attr("fill", d => colorScale(d.groupKey))
+                .attr("x", d => groupsScale(d.data.key))
+                .attr("y", d => yScale(d[1]))
+                .attr("width", groupsScale.bandwidth())
+                .attr("height", d => yScale(d[0]) - yScale(d[1]))
+
+                // .attr("height", d => height - yScale(d.value) - margin.bottom)
+                // .attr("fill", d => colorScale(d.groupKey))
                 .on("mouseover", (d) => {
                     d3.select(this)
                         .transition()
