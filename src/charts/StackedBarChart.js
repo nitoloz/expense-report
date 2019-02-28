@@ -38,6 +38,7 @@ function stackedBarChart() {
             const groupsScale = d3.scaleBand()
                 .rangeRound([margin.left, width - margin.right])
                 .paddingInner(0.1)
+                .paddingOuter(0.1)
                 .domain(xDomainValues);
 
             // const innerGroupScale = d3.scaleBand()
@@ -79,7 +80,9 @@ function stackedBarChart() {
                 .html(tooltipFormatter);
 
             barChartSvg.call(tooltip);
-            let stackedData = d3.stack().keys(expenseTypesArray)(data);
+            let stackedData = d3.stack()
+                .keys(expenseTypesArray)
+                .order(d3.stackOrderDescending)(data);
 
             barChartSvg.append("g")
                 .selectAll("g")
