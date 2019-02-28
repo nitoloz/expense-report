@@ -84,7 +84,10 @@ function stackedBarChart() {
             barChartSvg.append("g")
                 .selectAll("g")
                 .data(stackedData)
-                .enter()
+                .enter().append("g")
+                .attr("fill", function (d) {
+                    return colorScale(d.key);
+                })
                 .selectAll("rect")
                 .data(d => d)
                 .enter().append("rect")
@@ -93,25 +96,25 @@ function stackedBarChart() {
                 .attr("width", groupsScale.bandwidth())
                 .attr("height", d => yScale(d[0]) - yScale(d[1]))
 
-                // .attr("height", d => height - yScale(d.value) - margin.bottom)
-                // .attr("fill", d => colorScale(d.groupKey))
-                .on("mouseover", (d) => {
-                    d3.select(this)
-                        .transition()
-                        .duration(100)
-                        .attr('r', 10)
-                        .attr('stroke-width', 3);
-                    tooltip.show(d);
-
-                })
-                .on("mouseout", () => {
-                    d3.select(this)
-                        .transition()
-                        .duration(100)
-                        .attr('r', 5)
-                        .attr('stroke-width', 1);
-                    tooltip.hide();
-                });
+            // .attr("height", d => height - yScale(d.value) - margin.bottom)
+            // .attr("fill", d => colorScale(d.groupKey))
+            // .on("mouseover", (d) => {
+            //     d3.select(this)
+            //         .transition()
+            //         .duration(100)
+            //         .attr('r', 10)
+            //         .attr('stroke-width', 3);
+            //     tooltip.show(d);
+            //
+            // })
+            // .on("mouseout", () => {
+            //     d3.select(this)
+            //         .transition()
+            //         .duration(100)
+            //         .attr('r', 5)
+            //         .attr('stroke-width', 1);
+            //     tooltip.hide();
+            // });
 
             // const barChartLegend = stackedLegend()
             //     .colorScale(colorScale)
