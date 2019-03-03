@@ -41,6 +41,8 @@
 </script>
 
 <style>
+
+
     .d3-tip {
         line-height: 1;
         padding: 6px;
@@ -73,8 +75,12 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     >>> path:hover,
+    >>> rect:hover,
     >>> circle:hover {
         cursor: pointer;
+    }
+    >>>.tick line{
+        opacity: 0.5;
     }
 
 </style>

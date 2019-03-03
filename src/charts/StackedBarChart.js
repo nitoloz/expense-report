@@ -13,7 +13,8 @@ function stackedBarChart() {
         yAxisLabel: 'Expenses (EUR)',
         colorScale: expensesColorScale,
         tooltipFormatter: (data) => {
-            return `${xAxisLabel}: ${data.type}<br>
+            return `${xAxisLabel}: ${data.data.key}<br>
+            Expense type: ${data.type}<br>
             ${yAxisLabel}: ${data[1] - data[0]}`;
         }
     };
@@ -101,24 +102,23 @@ function stackedBarChart() {
                 .attr("y", d => yScale(d[1]))
                 .attr("width", groupsScale.bandwidth())
                 .attr("height", d => yScale(d[0]) - yScale(d[1]))
+                .attr('opacity', 0.8)
 
                 // .attr("height", d => height - yScale(d.value) - margin.bottom)
                 // .attr("fill", d => colorScale(d.groupKey))
                 .on("mouseover", function(d) {
-                    // d3.select(this)
-                    //     .transition()
-                    //     .duration(100)
-                    // .attr('r', 10)
-                    // .attr('stroke-width', 3);
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                    .attr('opacity', 1);
                     tooltip.show(d, this);
 
                 })
                 .on("mouseout", function() {
-                    // d3.select(this)
-                    //     .transition()
-                    //     .duration(100)
-                    //     .attr('r', 5)
-                    //     .attr('stroke-width', 1);
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .attr('opacity', 0.8);
                     tooltip.hide(this);
                 });
 
