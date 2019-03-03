@@ -13,8 +13,8 @@ function stackedBarChart() {
         yAxisLabel: 'Expenses (EUR)',
         colorScale: expensesColorScale,
         tooltipFormatter: (data) => {
-            return `${xAxisLabel}: ${data.key}<br>
-            ${yAxisLabel}: ${data.value}`;
+            return `${xAxisLabel}: ${data.type}<br>
+            ${yAxisLabel}: ${data[1] - data[0]}`;
         }
     };
 
@@ -92,32 +92,35 @@ function stackedBarChart() {
                     return colorScale(d.key);
                 })
                 .selectAll("rect")
-                .data(d => d)
+                .data(d => {
+                    d.forEach(rect => rect.type = d.key);
+                    return d;
+                })
                 .enter().append("rect")
                 .attr("x", d => groupsScale(d.data.key))
                 .attr("y", d => yScale(d[1]))
                 .attr("width", groupsScale.bandwidth())
                 .attr("height", d => yScale(d[0]) - yScale(d[1]))
 
-            // .attr("height", d => height - yScale(d.value) - margin.bottom)
-            // .attr("fill", d => colorScale(d.groupKey))
-            // .on("mouseover", (d) => {
-            //     d3.select(this)
-            //         .transition()
-            //         .duration(100)
-            //         .attr('r', 10)
-            //         .attr('stroke-width', 3);
-            //     tooltip.show(d);
-            //
-            // })
-            // .on("mouseout", () => {
-            //     d3.select(this)
-            //         .transition()
-            //         .duration(100)
-            //         .attr('r', 5)
-            //         .attr('stroke-width', 1);
-            //     tooltip.hide();
-            // });
+                // .attr("height", d => height - yScale(d.value) - margin.bottom)
+                // .attr("fill", d => colorScale(d.groupKey))
+                .on("mouseover", function(d) {
+                    // d3.select(this)
+                    //     .transition()
+                    //     .duration(100)
+                    // .attr('r', 10)
+                    // .attr('stroke-width', 3);
+                    tooltip.show(d, this);
+
+                })
+                .on("mouseout", function() {
+                    // d3.select(this)
+                    //     .transition()
+                    //     .duration(100)
+                    //     .attr('r', 5)
+                    //     .attr('stroke-width', 1);
+                    tooltip.hide(this);
+                });
 
             // const barChartLegend = stackedLegend()
             //     .colorScale(colorScale)
