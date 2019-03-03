@@ -9,6 +9,7 @@
 <script>
     import {db} from '../../main'
     import ExpenseItem from '../../enums/ExpenseItem'
+    import {expenseTypesArray} from '../../enums/ExpenseTypes';
 
     export default {
         name: 'MonthlyExpenseReportProcessor',
@@ -16,6 +17,7 @@
         methods: {
             classify: function () {
                 let expenseTypesMap = {};
+                expenseTypesArray.forEach(type => expenseTypesMap[type] = 0);
                 let that = this;
                 db.collection('expenses').doc(this.selectedMonth).collection('data').get().then(function (querySnapshot) {
                     querySnapshot.docs.forEach(d => {
