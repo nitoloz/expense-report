@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import d3Tip from 'd3-tip'
 import {expenseTypesArray} from '../enums/ExpenseTypes';
 import {expensesColorScale, margin, ChartUtils} from "./Utils";
+import stackedLegend from './StackedLegend';
 
 function stackedBarChart() {
 
@@ -122,14 +123,14 @@ function stackedBarChart() {
                     tooltip.hide(this);
                 });
 
-            // const barChartLegend = stackedLegend()
-            //     .colorScale(colorScale)
-            //     // .columns(2)
-            //     .data(colorScale.domain());
+            const barChartLegend = stackedLegend.stackedLegend()
+                .colorScale(colorScale)
+                // .columns(2)
+                .data(colorScale.domain());
 
-            // barChartSvg.append("g")
-            //     .attr("transform", `translate(${width - 150}, 5)`)
-            //     .call(barChartLegend);
+            barChartSvg.append("g")
+                .attr("transform", `translate(${width - 150}, 5)`)
+                .call(barChartLegend);
         })
     }
 
