@@ -84,7 +84,8 @@ function stackedBarChart() {
             barChartSvg.call(tooltip);
             let stackedData = d3.stack()
                 .keys(expenseTypesArray)
-                .order(d3.stackOrderDescending)(data);
+                .order(d3.stackOrderDescending)(data)
+                .sort((a, b) => a.index - b.index);
 
             barChartSvg.append("g")
                 .selectAll("g")
@@ -107,15 +108,15 @@ function stackedBarChart() {
 
                 // .attr("height", d => height - yScale(d.value) - margin.bottom)
                 // .attr("fill", d => colorScale(d.groupKey))
-                .on("mouseover", function(d) {
+                .on("mouseover", function (d) {
                     d3.select(this)
                         .transition()
                         .duration(100)
-                    .attr('opacity', 1);
+                        .attr('opacity', 1);
                     tooltip.show(d, this);
 
                 })
-                .on("mouseout", function() {
+                .on("mouseout", function () {
                     d3.select(this)
                         .transition()
                         .duration(100)
@@ -125,8 +126,7 @@ function stackedBarChart() {
 
             const barChartLegend = stackedLegend.stackedLegend()
                 .colorScale(colorScale)
-                // .columns(2)
-                .data(colorScale.domain());
+                .data(stackedData.map(d => d.key).reverse());
 
             barChartSvg.append("g")
                 .attr("transform", `translate(${width - 150}, 50)`)
