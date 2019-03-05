@@ -4,7 +4,7 @@ const expensesColorScale = d3.scaleOrdinal()
     .domain(['Lebensmittel', 'Restaurants', 'Transport', 'Reisen', 'Haus', 'Unterhaltung', 'Shopping', 'Lehre', 'Medizin', 'Haushaltswaren', 'Sonstig', 'Other'])
     .range(["#8dd3c7", "#ffffb3", "#bebada", "#d9d9d9", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#fb8072", "#bc80bd", "#ccebc5", "#ffed6f"]);
 
-const margin = {top: 50, right: 150, bottom: 50, left: 100};
+const margin = {top: 50, right: 180, bottom: 50, left: 100};
 
 class ChartUtils {
 
