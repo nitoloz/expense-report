@@ -129,7 +129,7 @@ function stackedBarChart() {
                 .data(colorScale.domain());
 
             barChartSvg.append("g")
-                .attr("transform", `translate(${width - 150}, 5)`)
+                .attr("transform", `translate(${width - 150}, 50)`)
                 .call(barChartLegend);
         })
     }
