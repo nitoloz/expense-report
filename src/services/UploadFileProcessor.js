@@ -21,7 +21,7 @@ const autoSelectedTypes = [
     {
         type: ExpenseTypes.RESTAURANTS,
         expenses: ['nordsee', 'starbucks', 'kamonsushibar', 'cafe bar celona', 'restaurant', 'hooters', 'sushi',
-            'moti mahal', 'lieferheld', 'mcdonalds', 'bareburger','naiv']
+            'moti mahal', 'lieferheld', 'mcdonalds', 'bareburger', 'naiv']
     },
     {
         type: ExpenseTypes.MEDIZIN,
@@ -70,6 +70,9 @@ export default class UploadFileProcessor {
 
     processFileName(fileName) {
         const splitFileName = fileName.substring(23, 33).split('-');
-        return `${months[parseInt(splitFileName[1]) - 1]} ${splitFileName[0]}`;
+        return {
+            monthYearDate: `${months[parseInt(splitFileName[1]) - 1]} ${splitFileName[0]}`,
+            exactDate: splitFileName
+        };
     }
 }

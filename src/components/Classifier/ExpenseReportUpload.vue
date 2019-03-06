@@ -22,10 +22,11 @@
       },
       fileChanged: function () {
         let reader = new FileReader();
-        let fileName = uploadFileProcessor.processFileName(this.$refs.fileInput.files[0].name);
+        let parsedFileName = uploadFileProcessor.processFileName(this.$refs.fileInput.files[0].name);
+        let monthYearDate = parsedFileName.monthYearDate;
         reader.onload = function () {
-          db.collection('expenses').doc(fileName).delete();
-          db.collection('expenses').doc(fileName).set({uploaded: new Date()});
+          db.collection('expenses').doc(monthYearDate).delete();
+          db.collection('expenses').doc(monthYearDate).set({uploaded: new Date(), invoiceIssueDate: parsedFileName.exactDate});
           const expenses = uploadFileProcessor.processUploadedFile(reader.result);
             let autoClassifiedExpenses = uploadFileProcessor.autoClassifyExpenses(expenses);
 
@@ -34,7 +35,7 @@
                     autoClassifiedExpenses.push(presetExpense.data())
                 });
                 autoClassifiedExpenses.forEach((expense, index) => db.collection('expenses')
-                    .doc(fileName).collection('data').doc(index.toString()).set(expense))
+                    .doc(monthYearDate).collection('data').doc(index.toString()).set(expense))
             });
         };
         reader.readAsText(this.$refs.fileInput.files[0]);
