@@ -72,7 +72,7 @@ export default class UploadFileProcessor {
         const splitFileName = fileName.substring(23, 33).split('-');
         return {
             monthYearDate: `${months[parseInt(splitFileName[1]) - 1]} ${splitFileName[0]}`,
-            exactDate: splitFileName
+            exactDate: fileName.substring(23, 33)
         };
     }
 }
