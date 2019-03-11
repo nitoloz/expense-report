@@ -12,11 +12,12 @@ const autoSelectedTypes = [
     {
         type: ExpenseTypes.SHOPPING,
         expenses: ['amazon', 'computerunive', 'conrad', 'karstadt', 'aliexpress', 'yves rocher', 'mango', 'h&m',
-            'amzn', 'saturn', 'hunkemoeller', 'hollister']
+            'amzn', 'saturn', 'hunkemoeller', 'hollister', 'sport scheck']
     },
     {
         type: ExpenseTypes.REISEN,
-        expenses: ['heinemann', 'flixbus', 'tuifly', 'condor', 'rent-a-car', 'hotel', 'auto europe', 'esso', 'lufthansa', 'aeroflot', 'ryanair', 'flughafen']
+        expenses: ['heinemann', 'flixbus', 'tuifly', 'condor', 'rent-a-car', 'hotel', 'auto europe', 'esso', 'lufthansa',
+            'aeroflot', 'ryanair', 'flughafen', 'buchbinder']
     },
     {
         type: ExpenseTypes.RESTAURANTS,
@@ -29,7 +30,7 @@ const autoSelectedTypes = [
     },
     {
         type: ExpenseTypes.TRANSPORT,
-        expenses: ['rmv.de']
+        expenses: ['rmv.de', 'byke mobility']
     },
     {
         type: ExpenseTypes.HAUSHALTSWAREN,
