@@ -37,11 +37,11 @@ function stackedBarChart() {
             const xDomainValues = data.map(group => group.key);
             const yDomainValues = data.map(group => group.total);
 
-            const groupsScale = d3.scaleBand()
+            const groupsScale = d3.scaleTime()
                 .rangeRound([margin.left, width - margin.right])
-                .paddingInner(0.1)
-                .paddingOuter(0.1)
-                .domain(xDomainValues);
+                // .paddingInner(0.1)
+                // .paddingOuter(0.1)
+                .domain(d3.extent(xDomainValues));
 
             // const innerGroupScale = d3.scaleBand()
             //     .padding(0.05)
@@ -102,7 +102,8 @@ function stackedBarChart() {
                 .enter().append("rect")
                 .attr("x", d => groupsScale(d.data.key))
                 .attr("y", d => yScale(d[1]))
-                .attr("width", groupsScale.bandwidth())
+                // .attr("width", groupsScale.bandwidth())
+                .attr("width", 40)
                 .attr("height", d => yScale(d[0]) - yScale(d[1]))
                 .attr('opacity', 0.8)
 

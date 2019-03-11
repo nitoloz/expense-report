@@ -37,7 +37,7 @@ export default class ChartDataProcessor {
 
     processStackedBarChartData(data) {
         return data.map(d => {
-            return {key: d.id, total: d3.sum(expenseTypesArray.map(type => d.expenseTypes[type])), ...d.expenseTypes}
+            return {key: new Date(d.invoiceIssueDate), total: d3.sum(expenseTypesArray.map(type => d.expenseTypes[type])), ...d.expenseTypes}
         })
     }
 }
