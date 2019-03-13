@@ -6,6 +6,7 @@ import stackedLegend from './StackedLegend';
 
 function stackedBarChart() {
 
+    const tooltipTimeFormat = d3.timeFormat("%B %Y");
     let initialConfiguration = {
         width: 1000,
         height: 600,
@@ -14,7 +15,7 @@ function stackedBarChart() {
         yAxisLabel: 'Expenses (EUR)',
         colorScale: expensesColorScale,
         tooltipFormatter: (data) => {
-            return `${xAxisLabel}: ${data.data.key}<br>
+            return `${xAxisLabel}: ${tooltipTimeFormat(data.data.key)}<br>
             Expense type: ${data.type}<br>
             ${yAxisLabel}: ${data[1] - data[0]}`;
         }
