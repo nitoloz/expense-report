@@ -55,7 +55,8 @@ function stackedBarChart() {
 
             const xAxis = d3.axisBottom(groupsScale)
             // .tickFormat(d => `${d}`)
-                .tickSizeOuter(0);
+                .tickSizeOuter(0)
+                .tickFormat(d3.timeFormat('%m/%Y'));
 
             const gXAxis = barChartSvg.append("g")
                 .attr("class", "x axis")
@@ -83,6 +84,8 @@ function stackedBarChart() {
                 .html(tooltipFormatter);
 
             barChartSvg.call(tooltip);
+
+            const barWidth = (width - margin.right - margin.left) / xAxis.scale().ticks().length * 0.9;
             let stackedData = d3.stack()
                 .keys(expenseTypesArray)
                 .order(d3.stackOrderDescending)(data)
@@ -101,10 +104,10 @@ function stackedBarChart() {
                     return d;
                 })
                 .enter().append("rect")
-                .attr("x", d => groupsScale(d.data.key))
+                .attr("x", d => groupsScale(d.data.key) - barWidth / 2)
                 .attr("y", d => yScale(d[1]))
                 // .attr("width", groupsScale.bandwidth())
-                .attr("width", 40)
+                .attr("width", barWidth)
                 .attr("height", d => yScale(d[0]) - yScale(d[1]))
                 .attr('opacity', 0.8)
 
