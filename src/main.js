@@ -17,6 +17,7 @@ firebase.initializeApp({
   storageBucket: "expencesreport-f8c8c.appspot.com",
   messagingSenderId: "868933781431"
 });
+
 export const db = firebase.firestore();
 
 new Vue({
