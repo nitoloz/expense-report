@@ -35,14 +35,16 @@ function stackedBarChart() {
                 .attr('height', height)
                 .attr('width', width);
 
-            const xDomainValues = data.map(group => group.key);
+            const xDomainValues = data.map(group => group.key).slice();
             const yDomainValues = data.map(group => group.total);
+            const minDate = new Date(d3.extent(xDomainValues)[0]);
+            const maxDate =  new Date(d3.extent(xDomainValues)[1]);
 
             const groupsScale = d3.scaleTime()
                 .rangeRound([margin.left, width - margin.right])
                 // .paddingInner(0.1)
                 // .paddingOuter(0.1)
-                .domain(d3.extent(xDomainValues));
+                .domain([new Date(minDate.setMonth(minDate.getMonth() - 1)), new Date(maxDate.setMonth(maxDate.getMonth() + 1))]);
 
             // const innerGroupScale = d3.scaleBand()
             //     .padding(0.05)
