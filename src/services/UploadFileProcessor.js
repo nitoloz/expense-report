@@ -17,12 +17,12 @@ const autoSelectedTypes = [
     {
         type: ExpenseTypes.REISEN,
         expenses: ['heinemann', 'flixbus', 'tuifly', 'condor', 'rent-a-car', 'hotel', 'auto europe', 'esso', 'lufthansa',
-            'aeroflot', 'ryanair', 'flughafen', 'buchbinder']
+            'aeroflot', 'ryanair', 'flughafen', 'buchbinder', 'flib travel international']
     },
     {
         type: ExpenseTypes.RESTAURANTS,
         expenses: ['nordsee', 'starbucks', 'kamonsushibar', 'cafe bar celona', 'restaurant', 'hooters', 'sushi',
-            'moti mahal', 'lieferheld', 'mcdonalds', 'bareburger', 'naiv']
+            'moti mahal', 'lieferheld', 'mcdonalds', 'bareburger', 'naiv', 'fletchers', 'cafe']
     },
     {
         type: ExpenseTypes.MEDIZIN,
@@ -38,7 +38,7 @@ const autoSelectedTypes = [
     },
     {
         type: ExpenseTypes.UNTERHALTUNG,
-        expenses: ['steamgames', 'itunes']
+        expenses: ['steamgames', 'itunes', 'therme', 'blume 2000', 'google play']
     }
 ];
 
