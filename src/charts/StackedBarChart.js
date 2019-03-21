@@ -18,7 +18,8 @@ function stackedBarChart() {
             return `${xAxisLabel}: ${tooltipTimeFormat(data.data.key)}<br>
             Expense type: ${data.type}<br>
             ${yAxisLabel}: ${data[1] - data[0]}`;
-        }
+        },
+        clickCallback: null
     };
 
     let width = initialConfiguration.width,
@@ -27,7 +28,8 @@ function stackedBarChart() {
         xAxisLabel = initialConfiguration.xAxisLabel,
         yAxisLabel = initialConfiguration.yAxisLabel,
         colorScale = initialConfiguration.colorScale,
-        tooltipFormatter = initialConfiguration.tooltipFormatter;
+        tooltipFormatter = initialConfiguration.tooltipFormatter,
+        clickCallback = initialConfiguration.clickCallback;
 
     function chart(selection) {
         selection.each(function () {
@@ -38,7 +40,7 @@ function stackedBarChart() {
             const xDomainValues = data.map(group => group.key).slice();
             const yDomainValues = data.map(group => group.total);
             const minDate = new Date(d3.extent(xDomainValues)[0]);
-            const maxDate =  new Date(d3.extent(xDomainValues)[1]);
+            const maxDate = new Date(d3.extent(xDomainValues)[1]);
 
             const groupsScale = d3.scaleTime()
                 .rangeRound([margin.left, width - margin.right])
@@ -129,6 +131,11 @@ function stackedBarChart() {
                         .duration(100)
                         .attr('opacity', 0.8);
                     tooltip.hide(this);
+                })
+                .on("click", function (d) {
+                    if(clickCallback){
+                        clickCallback(d.data);
+                    }
                 });
 
             const barChartLegend = stackedLegend.stackedLegend()
@@ -168,6 +175,12 @@ function stackedBarChart() {
     chart.colorScale = function (value) {
         if (!arguments.length) return colorScale;
         colorScale = value;
+        return chart;
+    };
+
+    chart.clickCallback = function (value) {
+        if (!arguments.length) return clickCallback;
+        clickCallback = value;
         return chart;
     };
 

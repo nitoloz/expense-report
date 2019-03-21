@@ -26,6 +26,11 @@
                 }
             }
         },
+        methods: {
+            barClick: function (d) {
+                this.$emit('month-selection', d);
+            }
+        },
         data() {
             return {
                 expensesGroups: []
@@ -34,7 +39,8 @@
         created() {
             barChart = stackedBarChart.stackedBarChart()
                 .width(1500)
-                .height(600);
+                .height(600)
+                .clickCallback(this.barClick);
 
         }
     }
@@ -74,12 +80,13 @@
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    >>> path:hover,
-    >>> rect:hover,
-    >>> circle:hover {
+    > > > path:hover,
+    > > > rect:hover,
+    > > > circle:hover {
         cursor: pointer;
     }
-    >>>.tick line{
+
+    > > > .tick line {
         opacity: 0.5;
     }
 

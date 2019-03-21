@@ -2,13 +2,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <BarChart :data="allExpenses"/>
+                <BarChart :data="allExpenses" v-on:month-selection="selectBar"/>
             </div>
         </div>
         <h3 v-if="!selectedMonth"> Please select expenses month to view monthly diagram!</h3>
         <div class="row">
             <div class="col-lg-7">
-                <PieChart :data="monthlyExpenses" :month="selectedMonth" v-on:select-pie-section="selectPieChartSection"/>
+                <PieChart :data="monthlyExpenses" :month="selectedMonth"
+                          v-on:select-pie-section="selectPieChartSection"/>
             </div>
             <div class="col-lg-5 expenses-list">
                 <ExpenseList :expensesSection="expensesSection"/>
@@ -50,6 +51,9 @@
                     }
                 }
             },
+            selectBar: function (data) {
+                console.log(JSON.stringify(data));
+            },
             fetchSectionExpenses: function (section) {
                 if (section) {
                     this.$bind('expensesSection', db.collection('expenses').doc(this.selectedMonth).collection('data')
@@ -66,7 +70,7 @@
         },
         data() {
             return {
-                allExpenses:[],
+                allExpenses: [],
                 monthlyExpenses: [],
                 expensesSection: [],
                 ExpenseItem: ExpenseItem
