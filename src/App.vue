@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <Navbar v-on:select-month="selectMonth"/>
-        <router-view :selectedMonth="selectedMonth"></router-view>
+        <Navbar v-on:select-month="selectMonth" :selectedMonth="selectedMonth"/>
+        <router-view :selectedMonth="selectedMonth" v-on:select-month="selectMonth"></router-view>
     </div>
 </template>
 

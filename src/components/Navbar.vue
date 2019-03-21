@@ -13,7 +13,7 @@
                     <router-link class="nav-link" active-class="active" to="/preset">Preset</router-link>
                 </li>
                 <li class="nav-item ml-5">
-                    <ExpenseReportSelector v-on:select-month="selectMonth" :months="firebaseExpenses"/>
+                    <ExpenseReportSelector v-on:select-month="selectMonth" :selectedMonth="selectedMonth" :months="firebaseExpenses"/>
                 </li>
             </ul>
 
@@ -54,7 +54,8 @@
 
   export default {
     name: 'Navbar',
-    components: {
+      props: {selectedMonth: String},
+      components: {
       ExpenseReportSelector
     },
     methods: {
