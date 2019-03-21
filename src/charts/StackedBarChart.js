@@ -134,7 +134,7 @@ function stackedBarChart() {
                 })
                 .on("click", function (d) {
                     if(clickCallback){
-                        clickCallback(d.data);
+                        clickCallback(d.data.id);
                     }
                 });
 

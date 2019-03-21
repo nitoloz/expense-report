@@ -51,8 +51,8 @@
                     }
                 }
             },
-            selectBar: function (data) {
-                console.log(JSON.stringify(data));
+            selectBar: function (monthName) {
+                this.$emit('select-month', monthName);
             },
             fetchSectionExpenses: function (section) {
                 if (section) {
